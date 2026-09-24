@@ -1,0 +1,1704 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stimulation cérébrale profonde et TOC · cours interactif</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..500&display=swap">
+<style>
+:root{
+  --paper:#ECF0F2; --panel:#F7F9FA; --ink:#14202A; --muted:#55626D; --rule:#C5CED4; --rule-2:#DCE3E7;
+  --accent:#2757B8; --accent-soft:rgba(39,87,184,.09);
+  --film:#10161A; --film-2:#1A242A; --film-3:#27333B; --film-line:#3A4852; --film-ink:#D8E0E5; --film-muted:#93A1AB;
+  --r:#E0554A; --g:#35A56E; --b:#4C88EA; --amber:#F2AA3F;
+  --c3:#21774A; --c2:#8A5C00; --c1:#B3261E; --warn:#B3261E;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Archivo", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0C1115; --panel:#12191E; --ink:#E1E8EC; --muted:#9AA8B2; --rule:#2B3740; --rule-2:#1E282F;
+    --accent:#86AEF5; --accent-soft:rgba(134,174,245,.12);
+    --film:#05080A; --film-2:#10171C; --film-3:#1B252C; --film-line:#2E3B44;
+    --c3:#66CC93; --c2:#E3B551; --c1:#F2837A; --warn:#F2837A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0C1115; --panel:#12191E; --ink:#E1E8EC; --muted:#9AA8B2; --rule:#2B3740; --rule-2:#1E282F;
+  --accent:#86AEF5; --accent-soft:rgba(134,174,245,.12);
+  --film:#05080A; --film-2:#10171C; --film-3:#1B252C; --film-line:#2E3B44;
+  --c3:#66CC93; --c2:#E3B551; --c1:#F2837A; --warn:#F2837A;
+  color-scheme:dark;
+}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.64;font-optical-sizing:auto;text-rendering:optimizeLegibility}
+a{color:var(--accent);text-underline-offset:2px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+img,svg{max-width:100%}
+h1,h2,h3,h4{font-family:var(--sans);letter-spacing:-.005em;line-height:1.14;margin:0}
+h1{font-stretch:82%;font-weight:760;font-size:clamp(34px,5.6vw,60px);line-height:1.0;letter-spacing:-.018em}
+h2{font-stretch:88%;font-weight:720;font-size:clamp(28px,3.8vw,40px)}
+h3{font-stretch:92%;font-weight:680;font-size:22px;margin:44px 0 12px}
+h4{font-weight:650;font-size:16px}
+p{margin:0 0 14px}
+.txt p,.txt ul,.txt ol,.txt dl{max-width:68ch}
+.txt ul,.txt ol{padding-left:1.2em;margin:0 0 16px}
+.txt li{margin:0 0 6px}
+small,.small{font-size:14px}
+.muted{color:var(--muted)}
+.sans{font-family:var(--sans)}
+.num{font-family:var(--sans);font-variant-numeric:tabular-nums}
+
+/* Top bar (mobile) */
+.topbar{display:none;position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--paper);border-bottom:1px solid var(--rule);padding:10px 14px;align-items:center;gap:12px;font-family:var(--sans)}
+.topbar .tb-title{flex:1;min-width:0;font-weight:650;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-btn{border:1px solid var(--rule);background:var(--panel);border-radius:6px;padding:7px 12px;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:272px minmax(0,1fr);align-items:start}
+#toc{position:sticky;top:env(safe-area-inset-top,0px);max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow-y:auto;border-right:1px solid var(--rule);padding:26px 18px 30px 22px;font-family:var(--sans)}
+.brand{font-weight:760;font-stretch:84%;font-size:19px;line-height:1.15;margin:0 0 4px}
+.brand-sub{font-size:13.5px;color:var(--muted);margin:0 0 20px;line-height:1.4}
+#toc ol{list-style:none;margin:0;padding:0}
+#toc li a{display:grid;grid-template-columns:26px 1fr 14px;gap:6px;align-items:baseline;padding:7px 8px;border-radius:6px;text-decoration:none;color:var(--ink);font-size:14.5px;line-height:1.3}
+#toc li a:hover{background:var(--accent-soft)}
+#toc li a[aria-current="page"]{background:var(--accent-soft);color:var(--accent);font-weight:650}
+#toc .n{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600;font-size:13px}
+#toc .seen{width:8px;height:8px;border-radius:50%;align-self:center;justify-self:end}
+#toc a.visited .seen{background:var(--c3)}
+.toc-foot{margin-top:22px;padding-top:14px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:10px}
+.toc-foot .tb-btn{align-self:flex-start}
+.progress{height:4px;background:var(--rule-2);border-radius:4px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--c3);width:0;transition:width .3s}
+
+main{padding:36px clamp(18px,4.5vw,56px) 80px;min-width:0}
+.chap{max-width:940px}
+.chap[hidden]{display:none}
+.chap-head{display:grid;grid-template-columns:auto 1fr;gap:0 18px;align-items:end;margin:4px 0 28px;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+.chap-num{font-family:var(--sans);font-stretch:62%;font-weight:800;font-size:92px;line-height:.78;color:var(--rule);font-variant-numeric:tabular-nums}
+.chap-head p{grid-column:2;margin:8px 0 0;color:var(--muted);font-size:16px;max-width:62ch}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:34px;align-items:center;margin:0 0 30px}
+.hero .lede{font-size:19px;line-height:1.55;margin:18px 0 0;max-width:40ch}
+.hero-plate{margin:0}
+.hero-svg{display:block;width:100%;height:auto}
+.hero-legend{font-family:var(--sans);font-size:13px;color:var(--film-muted);display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* Key figures */
+.keyfig{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0 28px;margin:10px 0 8px;border-top:1px solid var(--rule)}
+.keyfig div{padding:14px 0 14px;border-bottom:1px solid var(--rule)}
+.keyfig dt{font-family:var(--sans);font-weight:720;font-stretch:86%;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums}
+.keyfig dd{margin:4px 0 0;font-size:15px;color:var(--muted);line-height:1.45}
+
+/* Film plates */
+.plate{background:var(--film);color:var(--film-ink);border-radius:6px;padding:16px 18px 18px;margin:28px 0;border:1px solid var(--film-line)}
+.plate-cap{font-family:var(--sans);font-size:14px;color:var(--film-muted);margin:0 0 12px;line-height:1.4}
+.plate-cap b{color:var(--film-ink);font-weight:650;margin-right:6px}
+.plate p,.plate li{color:var(--film-ink)}
+.plate .muted{color:var(--film-muted)}
+.plate a{color:#9EC0FF}
+.plate .conf.c3{color:#6FD39B}.plate .conf.c2{color:#E8BD5C}.plate .conf.c1{color:#FF9189}
+.svgscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.svgscroll>svg{min-width:600px;display:block;width:100%;height:auto}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;font-family:var(--sans)}
+.chip{border:1px solid var(--film-line);background:var(--film-2);color:var(--film-ink);border-radius:999px;padding:6px 13px;font-size:14px;font-weight:560;cursor:pointer;line-height:1.2}
+.chip:hover{border-color:#5B6C78}
+.chip[aria-pressed="true"]{background:var(--film-ink);color:var(--film);border-color:var(--film-ink)}
+.infobox{background:var(--film-2);border:1px solid var(--film-line);border-radius:6px;padding:14px 16px;margin-top:14px;font-size:15.5px;line-height:1.55;min-height:84px}
+.infobox h4{font-family:var(--sans);font-size:17px;margin:0 0 6px;color:var(--film-ink)}
+.infobox p{margin:0 0 8px}
+.infobox p:last-child{margin-bottom:0}
+.infobox dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;margin:8px 0 0}
+.infobox dt{font-family:var(--sans);font-size:13.5px;color:var(--film-muted);font-weight:600;padding-top:2px}
+.infobox dd{margin:0}
+
+/* Confidence */
+.conf{font-family:var(--sans);font-size:12.5px;font-weight:620;display:inline-flex;align-items:center;gap:6px;padding:1px 9px 1px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;vertical-align:1px;line-height:1.5}
+.conf::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.conf.c3{color:var(--c3)}.conf.c2{color:var(--c2)}.conf.c1{color:var(--c1)}
+.legend-conf{display:grid;gap:10px;margin:12px 0 18px}
+.legend-conf div{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:baseline;font-size:15.5px}
+
+/* Notes */
+.note{border-left:3px solid var(--accent);padding:6px 0 6px 16px;margin:24px 0;max-width:72ch}
+.note h4{margin:0 0 4px;font-size:15.5px}
+.note p:last-child{margin-bottom:0}
+.note.key{border-color:var(--c3)}
+.note.assume{border-color:var(--c2)}
+.note.warn{border-color:var(--warn)}
+
+/* Tables */
+.tbl{overflow-x:auto;margin:20px 0 24px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:14.5px;line-height:1.45;min-width:640px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px 10px 0;border-bottom:1px solid var(--rule)}
+th{font-weight:650;color:var(--muted);font-size:13.5px;border-bottom:1.5px solid var(--ink)}
+td:first-child{font-weight:600}
+caption{caption-side:bottom;text-align:left;font-size:13px;color:var(--muted);padding-top:8px}
+
+/* Citations */
+sup.cite{font-family:var(--sans);font-size:.68em;line-height:0;white-space:nowrap}
+.refbtn{background:none;border:0;padding:3px 2px;margin:-3px 0;line-height:1;display:inline-block;color:var(--accent);cursor:pointer;font-weight:650;font-size:inherit;font-family:var(--sans)}
+.plate .refbtn{color:#9EC0FF}
+#refpop{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(640px,calc(100% - 24px));background:var(--panel);color:var(--ink);border:1px solid var(--rule);box-shadow:0 10px 34px rgba(0,0,0,.22);border-radius:8px;padding:14px 44px 14px 16px;font-size:14.5px;line-height:1.5;z-index:60}
+#refpop[hidden]{display:none}
+#refpop .x{position:absolute;right:8px;top:8px;border:0;background:none;font-family:var(--sans);font-size:14px;cursor:pointer;color:var(--muted);padding:6px}
+#refpop p{margin:0 0 8px}
+#refpop p:last-child{margin:0}
+
+/* Pager */
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:56px 0 0;padding-top:20px;border-top:1px solid var(--rule);font-family:var(--sans)}
+.pager a{display:block;text-decoration:none;color:var(--ink);padding:12px 14px;border:1px solid var(--rule);border-radius:6px;font-weight:650;font-size:15.5px;line-height:1.3}
+.pager a:hover{border-color:var(--accent)}
+.pager small{display:block;color:var(--muted);font-weight:500;font-size:13px;margin-bottom:3px}
+.pager .next{text-align:right;grid-column:2}
+
+/* Y-BOCS */
+.yb-tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.yb-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 28px}
+.yb-col h4{font-size:14px;color:var(--film-muted);margin:4px 0 6px;font-weight:600}
+.yb-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--film-3);font-family:var(--sans);font-size:14.5px}
+.seg{display:inline-flex;border:1px solid var(--film-line);border-radius:6px;overflow:hidden}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:block;width:30px;text-align:center;padding:4px 0;font-size:14px;cursor:pointer;border-left:1px solid var(--film-line);font-variant-numeric:tabular-nums}
+.seg label:first-child span{border-left:0}
+.seg input:checked+span{background:var(--film-ink);color:var(--film)}
+.seg input:focus-visible+span{outline:2px solid #9EC0FF;outline-offset:-2px}
+.yb-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0 10px;font-family:var(--sans)}
+.yb-out div{background:var(--film-2);border:1px solid var(--film-line);border-radius:6px;padding:10px 12px}
+.yb-out b{display:block;font-size:26px;font-weight:720;font-stretch:88%;font-variant-numeric:tabular-nums;line-height:1.1}
+.yb-out span{font-size:13px;color:var(--film-muted)}
+.scale{position:relative;height:34px;margin:22px 0 30px;font-family:var(--sans)}
+.scale .band{position:absolute;top:10px;height:14px}
+.scale .band em{position:absolute;top:18px;left:0;font-style:normal;font-size:11.5px;color:var(--film-muted);white-space:nowrap}
+.scale .mk{position:absolute;top:0;width:2px;height:34px;background:var(--film-ink);transform:translateX(-1px)}
+.scale .mk::after{content:attr(data-l);position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:650;white-space:nowrap}
+.verdict{font-family:var(--sans);font-size:16px;font-weight:620;padding:10px 12px;border-radius:6px;background:var(--film-3)}
+
+/* Evidence bars */
+.bars{display:grid;gap:10px;font-family:var(--sans);font-size:14px}
+.bar-row{display:grid;grid-template-columns:minmax(180px,300px) 1fr 52px;gap:12px;align-items:center}
+.bar-track{height:16px;background:var(--film-2);border-radius:3px;position:relative;overflow:hidden}
+.bar-fill{position:absolute;left:0;top:0;bottom:0;border-radius:3px;transition:width .45s ease}
+.bar-val{font-variant-numeric:tabular-nums;font-weight:650;text-align:right}
+.icons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:8px}
+.iconarr{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;max-width:240px}
+.iconarr i{display:block;aspect-ratio:1;border-radius:50%;background:var(--film-3)}
+.iconarr i.on{background:var(--amber)}
+.iconarr.sham i.on{background:#9AA8B2}
+
+/* Simulator */
+.sim{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+.ctrl{display:grid;gap:12px;font-family:var(--sans);font-size:14.5px}
+.ctrl label{display:grid;gap:4px}
+.ctrl .row{display:flex;justify-content:space-between;gap:8px}
+.ctrl output{font-variant-numeric:tabular-nums;font-weight:650}
+input[type=range]{width:100%;accent-color:var(--amber)}
+select{font:inherit;font-size:14.5px;background:var(--film-2);color:var(--film-ink);border:1px solid var(--film-line);border-radius:6px;padding:6px 8px}
+.sim-out{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-family:var(--sans);margin-top:14px}
+.sim-out div{background:var(--film-2);border:1px solid var(--film-line);border-radius:6px;padding:9px 11px}
+.sim-out b{display:block;font-size:20px;font-weight:720;font-variant-numeric:tabular-nums;font-stretch:90%}
+.sim-out span{font-size:12.5px;color:var(--film-muted);line-height:1.35;display:block}
+.sim-out .bad{border-color:#FF9189}
+.sim-out .mid{border-color:#E8BD5C}
+.gauge{height:6px;background:var(--film-3);border-radius:3px;margin-top:6px;overflow:hidden}
+.gauge i{display:block;height:100%;background:#6FD39B;width:0;transition:width .3s}
+.alert{font-family:var(--sans);font-size:14px;margin-top:12px;padding:9px 12px;border-radius:6px;border:1px solid #FF9189;color:#FFC1BC}
+.alert[hidden]{display:none}
+
+/* Case */
+.case-steps{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.dialog{display:grid;gap:10px;margin:12px 0}
+.line{display:grid;grid-template-columns:96px 1fr;gap:12px;font-size:16px;line-height:1.55}
+.line .who{font-family:var(--sans);font-size:13px;font-weight:700;padding-top:3px}
+.line.v .who{color:#9EC0FF}
+.line.h .who{color:var(--amber)}
+.case-data{font-family:var(--sans);font-size:14px;color:var(--film-muted);border-top:1px solid var(--film-3);padding-top:10px;margin-top:6px}
+.case-key{font-family:var(--sans);font-size:14.5px;background:var(--film-2);border-left:3px solid #6FD39B;padding:9px 12px;margin-top:10px}
+
+/* Quiz */
+.quiz{font-family:var(--sans)}
+.quiz .q{font-family:var(--serif);font-size:19px;line-height:1.45;margin:4px 0 14px}
+.quiz .opts{display:grid;gap:8px}
+.quiz .opt{text-align:left;border:1px solid var(--film-line);background:var(--film-2);color:var(--film-ink);border-radius:6px;padding:11px 14px;font-size:15.5px;cursor:pointer;line-height:1.35}
+.quiz .opt:hover:not(:disabled){border-color:#7A8B97}
+.quiz .opt.right{border-color:#6FD39B;background:rgba(111,211,155,.14)}
+.quiz .opt.wrong{border-color:#FF9189;background:rgba(255,145,137,.12)}
+.quiz .opt:disabled{cursor:default}
+.quiz .fb{margin-top:14px;font-size:15px;line-height:1.55}
+.quiz .fb[hidden]{display:none}
+.quiz .qnav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:12px;flex-wrap:wrap}
+.btn{border:1px solid var(--film-ink);background:var(--film-ink);color:var(--film);border-radius:6px;padding:9px 16px;font-family:var(--sans);font-weight:650;font-size:14.5px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--film-ink);border-color:var(--film-line)}
+
+/* Checklist */
+.checks{display:grid;gap:4px;font-family:var(--sans);font-size:14.5px}
+.checks label{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;padding:6px 0;border-bottom:1px solid var(--film-3);line-height:1.4;cursor:pointer}
+.checks input{margin-top:3px;accent-color:var(--amber);width:16px;height:16px}
+.checks h4{font-size:14px;color:var(--film-muted);margin:12px 0 4px;font-weight:600}
+
+/* Steps */
+.steps{list-style:none;padding:0;margin:18px 0;counter-reset:st;max-width:74ch}
+.steps>li{border-top:1px solid var(--rule);counter-increment:st}
+.steps>li:last-child{border-bottom:1px solid var(--rule)}
+.steps summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:baseline;padding:14px 0;font-family:var(--sans)}
+.steps summary::-webkit-details-marker{display:none}
+.steps summary::before{content:counter(st);font-weight:800;font-stretch:70%;font-size:26px;color:var(--muted);font-variant-numeric:tabular-nums}
+.steps summary b{font-weight:680;font-size:17px}
+.steps summary .when{font-size:13.5px;color:var(--muted);white-space:nowrap}
+.steps details[open] summary b{color:var(--accent)}
+.steps .body{padding:0 0 16px 52px}
+
+/* Two-column steelman */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:18px 0}
+.cols>div{border-top:3px solid var(--rule);padding-top:10px}
+.cols .pro{border-color:var(--c3)}
+.cols .con{border-color:var(--c1)}
+.cols ul{padding-left:1.1em;margin:0}
+.cols li{margin-bottom:8px;font-size:16px}
+
+/* Glossary & refs */
+.gloss{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;margin:12px 0 24px;max-width:80ch}
+.gloss dt{font-family:var(--sans);font-weight:680}
+.gloss dd{margin:0}
+#reflist{padding-left:2.2em;font-size:15px;line-height:1.5;max-width:90ch}
+#reflist li{margin-bottom:9px;scroll-margin-top:90px}
+#reflist li.flash{background:var(--accent-soft)}
+#reflist .lnk{font-family:var(--sans);font-size:13px;margin-left:6px;white-space:nowrap}
+
+@media (max-width: 980px){
+  .hero{grid-template-columns:1fr}
+  .sim{grid-template-columns:1fr}
+}
+@media (max-width: 900px){
+  .topbar{display:flex}
+  .layout{grid-template-columns:1fr}
+  #toc{position:fixed;top:0;left:0;bottom:0;width:min(320px,88vw);max-height:none;height:100%;z-index:70;background:var(--paper);transform:translateX(-104%);transition:transform .25s ease;box-shadow:0 0 40px rgba(0,0,0,.25);padding-top:calc(22px + env(safe-area-inset-top,0px));padding-bottom:calc(22px + env(safe-area-inset-bottom,0px))}
+  body.nav-open #toc{transform:none}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:65}
+  .scrim[hidden]{display:none}
+  main{padding-top:22px}
+  .chap-num{font-size:64px}
+  .yb-grid{grid-template-columns:1fr}
+  .cols{grid-template-columns:1fr}
+  .bar-row{grid-template-columns:1fr 46px}
+  .bar-row .bar-lab{grid-column:1 / -1}
+  .line{grid-template-columns:1fr;gap:2px}
+  .legend-conf div{grid-template-columns:1fr;gap:2px}
+  .steps .body{padding-left:0}
+}
+@media (max-width: 520px){
+  body{font-size:16.5px}
+  .sim-out{grid-template-columns:1fr 1fr}
+  .icons{grid-template-columns:1fr}
+  .pager{grid-template-columns:1fr}
+  .pager .next{grid-column:1}
+  .gloss{grid-template-columns:1fr;gap:2px 0}
+  .gloss dd{margin-bottom:8px}
+}
+
+/* One orchestrated moment: hero leads descend, field blooms, trace draws */
+@media (prefers-reduced-motion: no-preference){
+  .lead-in{animation:leadIn 1.1s cubic-bezier(.2,.7,.2,1) both}
+  .lead-in.r{animation-delay:.15s}
+  .field{transform-box:fill-box;transform-origin:center;animation:bloom 1.2s ease-out 1.1s both}
+  #hero-trace{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 1.8s ease-in-out 1.6s forwards}
+  .vta-circle{transition:r .25s ease}
+}
+@keyframes leadIn{from{transform:translateY(-150px);opacity:0}to{transform:none;opacity:1}}
+@keyframes bloom{0%{opacity:0;transform:scale(.3)}60%{opacity:1;transform:scale(1.08)}100%{opacity:.9;transform:scale(1)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* SVG diagram styles */
+.dg-node rect{fill:var(--film-2);stroke:var(--film-line);stroke-width:1.5}
+.dg-node text{fill:var(--film-ink);font-family:var(--sans);font-size:16px;font-weight:600;text-anchor:middle}
+.dg-node text.sub{font-size:13.5px;font-weight:500;fill:var(--film-muted)}
+.dg-node{cursor:pointer}
+.dg-node:hover rect,.dg-node:focus rect{stroke:#8FA0AC}
+.dg-node.sel rect{stroke:var(--amber);stroke-width:2.5}
+.dg-node.hot rect{fill:#3A2A1A;stroke:var(--amber)}
+.dg-node:focus{outline:none}
+.edge{fill:none;stroke:#6D7C87;stroke-width:2;opacity:.75;transition:opacity .25s,stroke-width .25s}
+.edge.dim{opacity:.12}
+.edge.on{opacity:1;stroke-width:3.4}
+.edge.hot{stroke-width:5.5}
+.tgt{display:none}
+.show-tgt .tgt{display:inline}
+.tgt circle{fill:rgba(242,170,63,.25);stroke:var(--amber);stroke-width:2}
+.tgt text{fill:var(--amber);font-family:var(--sans);font-size:14px;font-weight:700}
+.anat text{font-family:var(--sans);fill:var(--film-muted);font-size:15px}
+.anat .lab-strong{fill:var(--film-ink);font-weight:600}
+.anat .st{transition:fill .25s, stroke .25s}
+.anat .st.hl{stroke:var(--amber);stroke-width:2.5}
+.anat .fib.hl{opacity:1 !important;stroke-width:4}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button class="tb-btn" id="nav-open" type="button" aria-controls="toc" aria-expanded="false">Sommaire</button>
+  <span class="tb-title" id="tb-title">Vue d'ensemble</span>
+</header>
+<div class="scrim" id="scrim" hidden></div>
+<div class="layout">
+<nav id="toc" aria-label="Chapitres">
+  <p class="brand">SCP et TOC</p>
+  <p class="brand-sub">Cours interactif sur la stimulation cérébrale profonde dans le trouble obsessionnel-compulsif</p>
+  <ol id="toc-list"></ol>
+  <div class="toc-foot">
+    <span id="prog-label"></span>
+    <div class="progress"><i id="prog-bar"></i></div>
+    <button class="tb-btn" id="theme-btn" type="button">Thème : automatique</button>
+  </div>
+</nav>
+<main id="main">
+
+<!-- ============ 0 ============ -->
+<section class="chap" id="c0" data-title="Vue d'ensemble">
+  <div class="hero">
+    <div>
+      <h1>La stimulation cérébrale profonde dans le TOC</h1>
+      <p class="lede">Pourquoi implante-t-on des électrodes chez des patients atteints de trouble obsessionnel-compulsif sévère, où les place-t-on, comment les règle-t-on, et que valent réellement les preuves&nbsp;?</p>
+    </div>
+    <figure class="plate hero-plate">
+      <svg class="hero-svg" viewBox="0 0 640 470" role="img" aria-labelledby="hero-t hero-d">
+        <title id="hero-t">Coupe frontale schématique avec deux électrodes de stimulation</title>
+        <desc id="hero-d">Ventricules latéraux, noyaux caudés, putamens, fibres bleues du bras antérieur de la capsule interne et noyaux accumbens. Deux électrodes descendent jusqu'à la capsule ventrale et au striatum ventral, où un champ électrique s'allume. En bas, un train d'impulsions.</desc>
+        <defs>
+          <radialGradient id="glow"><stop offset="0" stop-color="#F2AA3F" stop-opacity=".9"/><stop offset=".5" stop-color="#F2AA3F" stop-opacity=".3"/><stop offset="1" stop-color="#F2AA3F" stop-opacity="0"/></radialGradient>
+        </defs>
+        <path d="M320,34 C468,34 588,122 594,236 C600,330 540,398 452,414 C404,422 364,406 320,396 C276,406 236,422 188,414 C100,398 40,330 46,236 C52,122 172,34 320,34 Z" fill="#1B252B" stroke="#3A4852" stroke-width="1.5"/>
+        <path d="M320,34 C468,34 588,122 594,236 C600,330 540,398 452,414 C404,422 364,406 320,396 C276,406 236,422 188,414 C100,398 40,330 46,236 C52,122 172,34 320,34 Z" fill="none" stroke="#28343C" stroke-width="16" transform="translate(320 230) scale(.93) translate(-320 -230)"/>
+        <path d="M320,36 L320,140" stroke="#0B1013" stroke-width="3"/>
+        <path d="M214,160 Q320,118 426,160" fill="none" stroke="#8C99A2" stroke-width="12" stroke-linecap="round" opacity=".5"/>
+        <ellipse cx="258" cy="206" rx="21" ry="36" fill="#5B6870"/>
+        <ellipse cx="382" cy="206" rx="21" ry="36" fill="#5B6870"/>
+        <path d="M312,160 C294,158 272,170 270,192 C268,210 280,224 296,228 L312,214 Z" fill="#0A0F12"/>
+        <path d="M328,160 C346,158 368,170 370,192 C372,210 360,224 344,228 L328,214 Z" fill="#0A0F12"/>
+        <ellipse cx="186" cy="252" rx="30" ry="56" transform="rotate(14 186 252)" fill="#4E5A62"/>
+        <ellipse cx="454" cy="252" rx="30" ry="56" transform="rotate(-14 454 252)" fill="#4E5A62"/>
+        <g stroke="#4C88EA" stroke-width="2" fill="none" opacity=".9">
+          <path d="M224,150 C226,200 226,250 230,300"/><path d="M229,150 C231,200 231,250 235,300"/><path d="M219,152 C221,200 221,250 225,298"/>
+          <path d="M416,150 C414,200 414,250 410,300"/><path d="M411,150 C409,200 409,250 405,300"/><path d="M421,152 C419,200 419,250 415,298"/>
+        </g>
+        <ellipse cx="246" cy="308" rx="22" ry="13" fill="#6B7880"/>
+        <ellipse cx="394" cy="308" rx="22" ry="13" fill="#6B7880"/>
+        <g transform="translate(234 300) rotate(-11.2)">
+          <g class="lead-in">
+            <rect x="-3.5" y="-300" width="7" height="300" rx="3.5" fill="#8E9AA2"/>
+            <g fill="#EEF2F4"><rect x="-4.5" y="-9" width="9" height="9" rx="2"/><rect x="-4.5" y="-22" width="9" height="9" rx="1"/><rect x="-4.5" y="-35" width="9" height="9" rx="1"/><rect x="-4.5" y="-48" width="9" height="9" rx="1"/></g>
+            <circle class="field" cx="0" cy="-17.5" r="32" fill="url(#glow)"/>
+          </g>
+        </g>
+        <g transform="translate(406 300) rotate(11.2)">
+          <g class="lead-in r">
+            <rect x="-3.5" y="-300" width="7" height="300" rx="3.5" fill="#8E9AA2"/>
+            <g fill="#EEF2F4"><rect x="-4.5" y="-9" width="9" height="9" rx="2"/><rect x="-4.5" y="-22" width="9" height="9" rx="1"/><rect x="-4.5" y="-35" width="9" height="9" rx="1"/><rect x="-4.5" y="-48" width="9" height="9" rx="1"/></g>
+            <circle class="field" cx="0" cy="-17.5" r="32" fill="url(#glow)"/>
+          </g>
+        </g>
+        <path id="hero-trace" d="" fill="none" stroke="#F2AA3F" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      <figcaption class="hero-legend">
+        <span><i class="sw" style="background:#4C88EA"></i>fibres de la capsule interne</span>
+        <span><i class="sw" style="background:#F2AA3F"></i>champ électrique et train d'impulsions</span>
+        <span><i class="sw" style="background:#6B7880"></i>noyaux gris centraux</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="txt">
+    <h3 style="margin-top:8px">L'essentiel en six chiffres</h3>
+  </div>
+  <dl class="keyfig">
+    <div><dt>1999</dt><dd>Première publication : stimulation de la capsule interne chez 4 patients <cite data-r="nuttin1999"></cite></dd></div>
+    <div><dt>≈ 10 %</dt><dd>des patients restent réfractaires malgré un traitement combiné maximal <cite data-r="denys2006"></cite></dd></div>
+    <div><dt>40 à 47 %</dt><dd>de baisse moyenne du score Y-BOCS dans les cohortes et méta-analyses, surtout ouvertes <cite data-r="denys2020,alonso2015,gadot2022,thava2026"></cite></dd></div>
+    <div><dt>52 à 66 %</dt><dd>de répondeurs (baisse ≥ 35 %) selon les séries et synthèses <cite data-r="denys2020,alonso2015,gadot2022"></cite></dd></div>
+    <div><dt>5,1 points</dt><dd>d'avantage moyen de la stimulation active sur la stimulation fictive, 9 essais randomisés, 91 patients <cite data-r="cohen2025"></cite></dd></div>
+    <div><dt>NNT 3,9</dt><dd>dans ces mêmes essais, mais une qualité de preuve jugée faible (GRADE) <cite data-r="cohen2025"></cite></dd></div>
+  </dl>
+
+  <div class="txt">
+    <h3>Comment lire ce cours</h3>
+    <p>Treize chapitres, à suivre dans l'ordre ou à la carte : la théorie (le trouble, les circuits, les mécanismes), la pratique (cibles, parcours du patient, programmation, sécurité), puis une lecture critique des preuves, un cas clinique commenté et un quiz. Les <strong>planches</strong> sur fond sombre sont interactives. Le bouton « Écouter ce chapitre » lance une lecture vocale, avec surlignage du passage en cours ; le cas clinique est lu à deux voix quand l'appareil en propose plusieurs. Les numéros entre crochets ouvrent la référence correspondante ; la liste complète est au dernier chapitre.</p>
+    <p>Chaque affirmation qui n'est pas solidement établie porte un indicateur de confiance :</p>
+    <div class="legend-conf">
+      <div><span><span class="conf c3">confiance forte</span></span><span>résultat issu d'essais contrôlés ou de synthèses concordantes, chiffre vérifié dans la source.</span></div>
+      <div><span><span class="conf c2">confiance moyenne</span></span><span>données cohérentes mais issues de petits échantillons ou d'études ouvertes, ou chiffre cité de mémoire que je n'ai pas revérifié dans la source primaire.</span></div>
+      <div><span><span class="conf c1">confiance faible</span></span><span>hypothèse, cas isolés, extrapolation ou modèle simplifié.</span></div>
+    </div>
+    <div class="note warn">
+      <h4>Avertissement</h4>
+      <p>Contenu pédagogique, pas un avis médical. Les paramètres de stimulation cités décrivent la littérature et ne sont pas des consignes de réglage. Les outils interactifs (calcul Y-BOCS, critères d'éligibilité, simulateur) sont des supports d'apprentissage et ne remplacent pas une évaluation en centre expert. Contenu arrêté en septembre 2026.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1 ============ -->
+<section class="chap" id="c1" data-title="Le TOC résistant" hidden>
+  <header class="chap-head"><span class="chap-num">1</span><h2>Le TOC résistant</h2><p>Ce qu'est le trouble, comment on le traite d'abord, et à partir de quand on parle de résistance.</p></header>
+  <div class="txt">
+    <h3 style="margin-top:0">Le trouble</h3>
+    <p>Le trouble obsessionnel-compulsif associe des <strong>obsessions</strong> (pensées, images ou impulsions intrusives, vécues comme envahissantes et anxiogènes) et des <strong>compulsions</strong> (comportements ou actes mentaux répétitifs destinés à neutraliser l'anxiété ou à prévenir un événement redouté). La compulsion soulage brièvement, ce qui renforce le cycle. La prévalence sur la vie entière est de l'ordre de 1 à 3 % <cite data-r="thava2026"></cite>.</p>
+    <p>Le DSM-5 le range dans un chapitre à part, les troubles obsessionnels-compulsifs et apparentés, et demande de préciser le niveau d'<strong>insight</strong> (bon, médiocre, absent). Ce détail compte pour la stimulation : dans une cohorte néerlandaise de 70 patients, un bon insight était le seul prédicteur individuel significatif de réponse <cite data-r="graat2021jcp"></cite>.</p>
+
+    <h3>Les traitements de première ligne</h3>
+    <p>Deux piliers : la thérapie cognitivo-comportementale avec <strong>exposition et prévention de la réponse</strong> (EPR), et les <strong>inhibiteurs de la recapture de la sérotonine</strong> (ISRS et clomipramine), souvent à doses plus élevées et sur des durées plus longues que dans la dépression. En cas de réponse insuffisante, on ajoute classiquement un antipsychotique à faible dose, comme la rispéridone ou l'aripiprazole <cite data-r="skapinakis2016"></cite>.</p>
+    <p>Malgré cela, 40 à 60 % des patients gardent des symptômes significatifs <cite data-r="hamani2014"></cite>, et environ 10 % restent réfractaires à un traitement combiné maximal <cite data-r="denys2006"></cite> <span class="conf c2">confiance moyenne</span>. C'est dans cette petite fraction, la plus sévère, que se pose la question de la neurochirurgie.</p>
+
+    <h3>Définir la résistance</h3>
+    <p>Il n'existe pas de définition unique. Pallanti et Quercioli ont proposé une gradation allant de la réponse complète au caractère réfractaire (aucun changement, voire aggravation, malgré tous les traitements disponibles) <cite data-r="pallanti2006"></cite>. Les essais de stimulation exigent en pratique :</p>
+    <ul>
+      <li>l'échec d'au moins deux à trois inhibiteurs de recapture à dose maximale tolérée pendant au moins 12 semaines, dont la clomipramine ;</li>
+      <li>l'échec d'au moins une stratégie d'augmentation par antipsychotique ;</li>
+      <li>une EPR adéquate, conduite par un thérapeute expérimenté ;</li>
+      <li>une sévérité élevée (Y-BOCS ≥ 28 dans la plupart des protocoles), un retentissement fonctionnel majeur et au moins cinq ans d'évolution <cite data-r="mallet2008,denys2020,nuttin2014"></cite>.</li>
+    </ul>
+    <div class="note assume">
+      <h4>Hypothèse cachée</h4>
+      <p>« Réfractaire » suppose que l'EPR a été réellement bien conduite. Or une EPR de qualité est rare et inégalement accessible. Un patient étiqueté résistant peut n'avoir jamais reçu d'exposition intensive correcte ; dans ce cas, l'indication chirurgicale repose sur une prémisse fausse.</p>
+    </div>
+
+    <h3>Mesurer la sévérité : la Y-BOCS</h3>
+    <p>La <strong>Yale-Brown Obsessive Compulsive Scale</strong> <cite data-r="goodman1989"></cite> est l'échelle de référence de tous les essais. Dix items cotés de 0 à 4, cinq pour les obsessions et cinq pour les compulsions, explorent le temps occupé, l'interférence avec la vie quotidienne, la détresse, l'effort de résistance et le degré de contrôle. Le total va de 0 à 40. Une version révisée (Y-BOCS-II, items cotés de 0 à 5) existe, mais les essais de stimulation utilisent surtout l'originale.</p>
+    <p>Repères usuels : 0–7 infraclinique, 8–15 léger, 16–23 modéré, 24–31 sévère, 32–40 extrême (les bornes varient légèrement selon les auteurs). Le consensus international <cite data-r="mataixcols2016"></cite> définit :</p>
+    <ul>
+      <li>la <strong>réponse</strong> : baisse d'au moins 35 % du score et impression clinique globale d'amélioration (CGI-I) de 1 ou 2 ;</li>
+      <li>la <strong>réponse partielle</strong> : baisse de 25 à 35 % ;</li>
+      <li>la <strong>rémission</strong> : score ≤ 12 et sévérité globale (CGI-S) de 1 ou 2, maintenus au moins une semaine.</li>
+    </ul>
+  </div>
+
+  <figure class="plate" id="yb">
+    <figcaption class="plate-cap"><b>Planche 1.</b>Calculez un score Y-BOCS et classez l'évolution. Cotez chaque dimension de 0 (absente) à 4 (extrême) pour l'évaluation initiale, puis pour le suivi.</figcaption>
+    <div class="chips" role="group" aria-label="Évaluation affichée">
+      <button class="chip" type="button" data-yb-tab="0" aria-pressed="true">Évaluation initiale</button>
+      <button class="chip" type="button" data-yb-tab="1" aria-pressed="false">Suivi</button>
+    </div>
+    <div class="chips" role="group" aria-label="Exemples">
+      <button class="chip" type="button" data-yb-preset="trial">Charger l'exemple 34 puis 22</button>
+      <button class="chip" type="button" data-yb-preset="case">Charger le cas clinique 35 puis 18</button>
+      <button class="chip" type="button" data-yb-preset="reset">Remettre à zéro</button>
+    </div>
+    <div class="yb-grid" id="yb-items"></div>
+    <div class="yb-out" aria-live="polite">
+      <div><b id="yb-t0">0</b><span>score initial</span></div>
+      <div><b id="yb-t1">0</b><span>score au suivi</span></div>
+      <div><b id="yb-pct">·</b><span>variation</span></div>
+    </div>
+    <div class="scale" id="yb-scale" aria-hidden="true"></div>
+    <p class="verdict" id="yb-verdict" aria-live="polite"></p>
+    <p class="muted small" style="margin-top:10px">Les intitulés résument les dimensions de l'échelle ; la cotation réelle se fait en entretien, avec les définitions et ancrages officiels.</p>
+  </figure>
+
+  <div class="note key">
+    <h4>Répondeur ne veut pas dire guéri</h4>
+    <p>Un patient qui passe de 34 à 22 a baissé de 35,3 % : il est répondeur. Mais 22 reste un TOC modéré. Dans les cohortes de stimulation, la plupart des répondeurs restent dans la zone modérée ; la rémission (≤ 12) est l'exception. Gardez cet écart en tête chaque fois que vous lirez un « taux de réponse ».</p>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="chap" id="c2" data-title="Les circuits du TOC" hidden>
+  <header class="chap-head"><span class="chap-num">2</span><h2>Les circuits du TOC</h2><p>Les boucles cortico-striato-thalamo-corticales, le modèle classique du trouble et ses limites.</p></header>
+  <div class="txt">
+    <h3 style="margin-top:0">Des boucles parallèles</h3>
+    <p>En 1986, Alexander, DeLong et Strick décrivent des circuits parallèles reliant chaque région du cortex frontal au striatum, puis aux noyaux de sortie des ganglions de la base (pallidum interne, substance noire réticulée), au thalamus, et de nouveau au cortex d'origine <cite data-r="alexander1986"></cite>. On distingue des boucles motrice, oculomotrice, préfrontale dorsolatérale, orbitofrontale latérale et cingulaire antérieure, dite limbique.</p>
+    <p>Dans chaque boucle, trois voies se font équilibre : la voie <strong>directe</strong> (accélérateur), la voie <strong>indirecte</strong> (frein) et la voie <strong>hyperdirecte</strong> (frein rapide qui court-circuite le striatum). Isolez-les ci-dessous, puis touchez une structure pour lire son rôle.</p>
+  </div>
+
+  <figure class="plate">
+    <figcaption class="plate-cap"><b>Planche 2.</b>Circuit cortico-striato-thalamo-cortical. Flèche : excitation (glutamate). Trait barré : inhibition (GABA). Vert : voie directe ; rouge : voie indirecte ; bleu : voie hyperdirecte.</figcaption>
+    <div class="chips" role="group" aria-label="Vue du circuit" id="cstc-modes">
+      <button class="chip" type="button" data-mode="all" aria-pressed="true">Vue d'ensemble</button>
+      <button class="chip" type="button" data-mode="direct" aria-pressed="false">Voie directe</button>
+      <button class="chip" type="button" data-mode="indirect" aria-pressed="false">Voie indirecte</button>
+      <button class="chip" type="button" data-mode="hyperdirect" aria-pressed="false">Voie hyperdirecte</button>
+      <button class="chip" type="button" data-mode="toc" aria-pressed="false">Hypothèse TOC</button>
+      <button class="chip" type="button" data-mode="targets" aria-pressed="false">Cibles de stimulation</button>
+    </div>
+    <div class="svgscroll">
+    <svg id="cstc" viewBox="0 0 760 490" role="group" aria-label="Circuit cortico-striato-thalamo-cortical interactif">
+      <defs>
+        <marker id="ah-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8795A0"/></marker>
+        <marker id="ah-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#E0554A"/></marker>
+        <marker id="ah-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4C88EA"/></marker>
+        <marker id="bar-n" viewBox="0 0 4 14" refX="2" refY="7" markerWidth="3" markerHeight="9" orient="auto"><rect width="4" height="14" fill="#8795A0"/></marker>
+        <marker id="bar-g" viewBox="0 0 4 14" refX="2" refY="7" markerWidth="3" markerHeight="9" orient="auto"><rect width="4" height="14" fill="#35A56E"/></marker>
+        <marker id="bar-r" viewBox="0 0 4 14" refX="2" refY="7" markerWidth="3" markerHeight="9" orient="auto"><rect width="4" height="14" fill="#E0554A"/></marker>
+      </defs>
+      <g id="edges">
+        <path class="edge e-n" data-m="direct indirect toc" d="M125,76 L136,172" marker-end="url(#ah-n)"/>
+        <path class="edge e-n" data-m="direct indirect toc" d="M345,76 C322,122 252,140 214,172" marker-end="url(#ah-n)"/>
+        <path class="edge e-g" data-m="direct toc" d="M205,236 C250,290 290,316 326,321" marker-end="url(#bar-g)"/>
+        <path class="edge e-r" data-m="indirect" d="M280,206 L336,206" marker-end="url(#bar-r)"/>
+        <path class="edge e-r" data-m="indirect" d="M450,206 L526,206" marker-end="url(#bar-r)"/>
+        <path class="edge e-r" data-m="indirect hyperdirect" d="M600,228 C592,288 532,318 474,322" marker-end="url(#ah-r)"/>
+        <path class="edge e-b" data-m="hyperdirect" d="M455,76 C530,108 614,130 628,180" marker-end="url(#ah-b)"/>
+        <path class="edge e-n" data-m="direct indirect hyperdirect toc" d="M330,334 C292,372 250,396 214,408" marker-end="url(#bar-n)"/>
+        <path class="edge e-n" data-m="direct indirect hyperdirect toc" d="M36,408 C8,330 8,170 30,80" marker-end="url(#ah-n)"/>
+        <path class="edge e-n" data-m="" d="M530,440 C420,472 292,330 272,240" marker-end="url(#ah-n)"/>
+      </g>
+      <g id="nodes">
+        <g class="dg-node" tabindex="0" role="button" data-node="ofc" aria-label="Cortex orbitofrontal"><rect x="20" y="20" width="210" height="56" rx="6"/><text x="125" y="54">Cortex orbitofrontal</text></g>
+        <g class="dg-node" tabindex="0" role="button" data-node="acc" aria-label="Cingulaire antérieur et cortex préfrontal dorsomédian"><rect x="275" y="20" width="210" height="56" rx="6"/><text x="380" y="44">Cingulaire antérieur</text><text class="sub" x="380" y="65">PFC dorsomédian</text></g>
+        <g class="dg-node" tabindex="0" role="button" data-node="dlpfc" aria-label="Cortex préfrontal dorsolatéral"><rect x="530" y="20" width="210" height="56" rx="6"/><text x="635" y="54">PFC dorsolatéral</text></g>
+        <g class="dg-node" tabindex="0" role="button" data-node="str" aria-label="Striatum"><rect x="30" y="176" width="250" height="60" rx="6"/><text x="155" y="202">Striatum</text><text class="sub" x="155" y="223">caudé, striatum ventral, NAc</text></g>
+        <g class="dg-node" tabindex="0" role="button" data-node="gpe" aria-label="Pallidum externe"><rect x="340" y="184" width="110" height="44" rx="6"/><text x="395" y="212">GPe</text></g>
+        <g class="dg-node" tabindex="0" role="button" data-node="stn" aria-label="Noyau sous-thalamique"><rect x="530" y="184" width="210" height="44" rx="6"/><text x="635" y="212">Noyau sous-thalamique</text></g>
+        <g class="dg-node" tabindex="0" role="button" data-node="gpi" aria-label="Pallidum interne et substance noire réticulée"><rect x="330" y="300" width="140" height="44" rx="6"/><text x="400" y="328">GPi / SNr</text></g>
+        <g class="dg-node" tabindex="0" role="button" data-node="thal" aria-label="Thalamus"><rect x="30" y="410" width="250" height="56" rx="6"/><text x="155" y="434">Thalamus</text><text class="sub" x="155" y="455">médiodorsal, ventral antérieur</text></g>
+        <g class="dg-node" tabindex="0" role="button" data-node="amy" aria-label="Amygdale et BNST"><rect x="530" y="410" width="210" height="56" rx="6"/><text x="635" y="443">Amygdale / BNST</text></g>
+      </g>
+      <g id="tgts">
+        <g class="tgt"><circle cx="131" cy="124" r="11"/><text x="148" y="152">ALIC / VC</text></g>
+        <g class="tgt"><circle cx="280" cy="236" r="11"/><text x="296" y="258">NAc / VS</text></g>
+        <g class="tgt"><circle cx="530" cy="184" r="11"/><text x="470" y="170">amSTN</text></g>
+        <g class="tgt"><circle cx="530" cy="410" r="11"/><text x="476" y="398">BNST</text></g>
+        <g class="tgt"><circle cx="15" cy="300" r="11"/><text x="32" y="305">ITP</text></g>
+      </g>
+    </svg>
+    </div>
+    <div class="infobox" id="cstc-info" aria-live="polite"></div>
+  </figure>
+
+  <div class="txt">
+    <h3>Le modèle classique du TOC</h3>
+    <p>L'imagerie fonctionnelle montre au repos une hyperactivité du cortex orbitofrontal, du cingulaire antérieur et du noyau caudé, qui s'accentue quand on provoque les symptômes et diminue après un traitement efficace, médicamenteux ou comportemental <cite data-r="saxena2000"></cite>. D'où l'idée d'une boucle orbitofronto-striatale bloquée en position « marche » : un signal d'alerte que la compulsion n'éteint que brièvement.</p>
+    <p><span class="conf c2">confiance moyenne</span> Le modèle a une forte valeur heuristique mais reste simplifié : les résultats d'imagerie ne sont pas tous concordants et une partie de l'hyperactivité pourrait être compensatoire.</p>
+
+    <h3>Au-delà de la boucle orbitofrontale</h3>
+    <ul>
+      <li><strong>Peur et extinction.</strong> Les patients ont du mal à désapprendre une peur conditionnée, ce qui implique le cortex préfrontal ventromédian et l'amygdale <cite data-r="milad2012"></cite>. C'est précisément ce que l'EPR entraîne.</li>
+      <li><strong>Habitudes.</strong> Les patients basculent plus facilement vers des comportements d'habitude, insensibles à la valeur du résultat <cite data-r="gillan2011"></cite>. Certaines compulsions seraient des habitudes secondairement rationalisées.</li>
+      <li><strong>Contrôle cognitif.</strong> Les circuits dorsaux (préfrontal dorsolatéral, cingulaire) sous-tendent l'inhibition de réponse et la détection d'erreur, altérées dans le trouble.</li>
+    </ul>
+
+    <h3>Des preuves causales chez l'animal</h3>
+    <p>Deux études publiées la même semaine en 2013 ont testé la causalité par optogénétique chez la souris. Chez Ahmari et coll., l'activation répétée des projections orbitofrontales vers le striatum ventromédian induisait un toilettage excessif et persistant, de type compulsif <cite data-r="ahmari2013"></cite>. Chez Burguière et coll., stimuler la voie orbitofronto-striatale latérale supprimait au contraire le toilettage compulsif de souris mutantes Sapap3 <cite data-r="burguiere2013"></cite>. Leçon : ce n'est pas le « trop » ou le « pas assez » d'une région qui compte, mais quelle voie est engagée et comment.</p>
+
+    <div class="note key">
+      <h4>À retenir pour la stimulation</h4>
+      <p>Toutes les cibles sont des nœuds ou des passages de fibres de ces boucles. Le bras antérieur de la capsule interne transporte des fibres reliant le cortex préfrontal (orbitofrontal, ventrolatéral, cingulaire, dorsomédian) au thalamus, au noyau sous-thalamique et au tronc cérébral <cite data-r="haber2021"></cite>. Les stimulations efficaces, quelle que soit la cible nominale, semblent converger vers un même faisceau reliant le cortex frontal médian à la région du noyau sous-thalamique <cite data-r="li2020,baldermann2019"></cite> <span class="conf c2">confiance moyenne</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="chap" id="c3" data-title="Comment agit la stimulation" hidden>
+  <header class="chap-head"><span class="chap-num">3</span><h2>Comment agit la stimulation</h2><p>Le matériel, ce que fait le courant dans le tissu, et pourquoi les effets arrivent à deux vitesses.</p></header>
+  <div class="txt">
+    <h3 style="margin-top:0">Le matériel et les réglages</h3>
+    <p>Une électrode par hémisphère (4 à 8 contacts, parfois segmentés pour orienter le courant), reliée par une extension sous-cutanée à un stimulateur implanté sous la clavicule. Le stimulateur délivre en continu des trains d'impulsions brèves, biphasiques et à charge équilibrée. Quatre réglages définissent la stimulation : l'<strong>amplitude</strong> (en volts ou en milliampères), la <strong>durée d'impulsion</strong> (en microsecondes), la <strong>fréquence</strong> (en hertz) et la <strong>configuration</strong> : quel contact est actif, et si le courant revient vers le boîtier (monopolaire) ou vers un autre contact (bipolaire).</p>
+  </div>
+
+  <figure class="plate">
+    <figcaption class="plate-cap"><b>Planche 3.</b>Anatomie d'un train d'impulsions. Échelle déformée : une impulsion dure 60 à 210 µs alors que l'intervalle entre deux impulsions est d'environ 7,7 ms à 130 Hz, soit 35 à 130 fois plus long.</figcaption>
+    <div class="svgscroll">
+    <svg viewBox="0 0 700 230" role="img" aria-label="Schéma d'un train d'impulsions biphasiques avec amplitude, durée d'impulsion et période">
+      <g font-family="Archivo, sans-serif" font-size="15" fill="#93A1AB">
+        <line x1="20" y1="100" x2="690" y2="100" stroke="#3A4852" stroke-width="1"/>
+        <path d="M20,100 L60,100 L60,175 L74,175 L74,100 L80,100 L80,88 L130,90 L160,100 L200,100 L200,175 L214,175 L214,100 L220,100 L220,88 L270,90 L300,100 L340,100 L340,175 L354,175 L354,100 L360,100 L360,88 L410,90 L440,100 L480,100 L480,175 L494,175 L494,100 L500,100 L500,88 L550,90 L580,100 L620,100 L620,175 L634,175 L634,100 L640,100 L640,88 L680,92 L690,100" fill="none" stroke="#F2AA3F" stroke-width="2.4" stroke-linejoin="round"/>
+        <line x1="40" y1="100" x2="40" y2="175" stroke="#D8E0E5" stroke-width="1.2"/>
+        <path d="M36,108 L40,100 L44,108 M36,167 L40,175 L44,167" stroke="#D8E0E5" fill="none" stroke-width="1.2"/>
+        <text x="10" y="212" fill="#D8E0E5">amplitude</text>
+        <line x1="200" y1="190" x2="214" y2="190" stroke="#D8E0E5" stroke-width="1.2"/>
+        <line x1="200" y1="184" x2="200" y2="196" stroke="#D8E0E5"/><line x1="214" y1="184" x2="214" y2="196" stroke="#D8E0E5"/>
+        <text x="160" y="214" fill="#D8E0E5">durée d'impulsion</text>
+        <line x1="340" y1="40" x2="480" y2="40" stroke="#D8E0E5" stroke-width="1.2"/>
+        <line x1="340" y1="32" x2="340" y2="48" stroke="#D8E0E5"/><line x1="480" y1="32" x2="480" y2="48" stroke="#D8E0E5"/>
+        <text x="410" y="26" text-anchor="middle" fill="#D8E0E5">période = 1 / fréquence</text>
+        <text x="520" y="72">recharge passive</text>
+        <path d="M540,78 L524,88" stroke="#93A1AB"/>
+        <text x="500" y="212">phase cathodique active</text>
+      </g>
+    </svg>
+    </div>
+  </figure>
+
+  <div class="txt">
+    <h3>Ce que fait le courant</h3>
+    <p><strong>Les axones d'abord.</strong> Les axones, surtout myélinisés et de gros calibre, s'excitent à des seuils plus bas que les corps cellulaires <cite data-r="ranck1975,mcintyre2004"></cite>. Dans la capsule interne, on stimule donc surtout des fibres : le message se propage dans les deux sens et agit à distance, notamment sur le cortex préfrontal.</p>
+    <p><strong>Dans les noyaux, un effet double.</strong> Dans le noyau sous-thalamique, la stimulation à haute fréquence tend à inhiber ou désynchroniser les corps cellulaires tout en activant les axones efférents et les fibres de passage <cite data-r="mcintyre2004,herrington2016"></cite>.</p>
+    <p><strong>Une lésion « informationnelle ».</strong> En imposant un rythme régulier, la stimulation remplacerait une activité pathologique porteuse d'information aberrante par un signal peu informatif : un effet proche de la lésion, mais réversible et réglable <cite data-r="herrington2016"></cite> <span class="conf c2">confiance moyenne</span>.</p>
+    <p><strong>Des effets de réseau mesurables.</strong> Chez les patients, la stimulation de l'accumbens réduit l'hyperconnectivité entre accumbens et cortex préfrontal <cite data-r="figee2013"></cite> et augmente la libération de dopamine striatale <cite data-r="figee2014"></cite>. La stimulation de la capsule ventrale améliore le contrôle cognitif et renforce l'activité thêta préfrontale <cite data-r="widge2019"></cite>.</p>
+
+    <h3>Deux horloges</h3>
+    <p>Les effets <strong>aigus</strong> apparaissent en secondes ou minutes : détente, élan, humeur plus légère, parfois rire spontané avec les cibles capsulaires et striatales, mais aussi anxiété ou bouffée de chaleur si le réglage est mal toléré. Les effets sur les <strong>obsessions et compulsions</strong> se construisent en semaines ou en mois. Dans la cohorte d'Amsterdam, le score baissait à la fois sous l'effet de la stimulation et avec le temps <cite data-r="denys2020"></cite>.</p>
+    <p>Ce décalage évoque un réapprentissage, et explique pourquoi on associe volontiers une EPR après l'implantation : la stimulation abaisse l'anxiété, ce qui rend les expositions supportables <cite data-r="mantione2014"></cite>.</p>
+
+    <h3>Du noyau au connectome</h3>
+    <p>Plutôt qu'une structure, on vise de plus en plus des <strong>fibres</strong>. Le volume de tissu activé est recalé sur un atlas de connexions pour savoir quels faisceaux sont stimulés. La réponse est associée à la connectivité vers certaines aires préfrontales <cite data-r="baldermann2019"></cite> ; un faisceau commun a été proposé comme cible unifiée <cite data-r="li2020"></cite>, puis affiné par des cartes de sites optimaux <cite data-r="meyer2024"></cite>.</p>
+    <div class="note assume">
+      <h4>Hypothèse cachée</h4>
+      <p>Ces modèles utilisent le plus souvent un connectome « normatif », moyenné sur des sujets sains, et non celui du patient. Testés patient par patient, ils corrèlent avec l'évolution sans la prédire de façon fiable <cite data-r="widge2022"></cite>. Utiles pour comprendre, pas encore pour décider au cas par cas.</p>
+    </div>
+
+    <h3>Vers une stimulation adaptative</h3>
+    <p>Certains stimulateurs enregistrent aussi l'activité cérébrale. Des enregistrements prolongés du striatum ventral au domicile, synchronisés avec le comportement, ont été obtenus chez des patients implantés <cite data-r="provenza2021"></cite>, et la disparition de la périodicité de ce signal a été associée à la réponse clinique <cite data-r="provenza2024"></cite>. Des essais en boucle fermée sont en cours <cite data-r="nct04806516,nct06660225"></cite>. <span class="conf c1">confiance faible</span> sur le bénéfice clinique : à ma connaissance, aucune donnée comparative publiée à ce jour.</p>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="chap" id="c4" data-title="Les cibles" hidden>
+  <header class="chap-head"><span class="chap-num">4</span><h2>Les cibles</h2><p>Six cibles utilisées, aucune supérieure démontrée, et peut-être un réseau commun.</p></header>
+  <div class="txt">
+    <p>Au moins six cibles ont été utilisées. Aucune n'a démontré sa supériorité : les recommandations américaines jugent les données insuffisantes pour désigner la meilleure <cite data-r="staudt2021"></cite>, et les méta-analyses ne trouvent pas de différence d'efficacité entre cibles <cite data-r="alonso2015,thava2026"></cite>. Explication plausible : ce sont des portes d'entrée différentes vers le même réseau de fibres <cite data-r="haber2021"></cite>.</p>
+  </div>
+
+  <figure class="plate">
+    <figcaption class="plate-cap"><b>Planche 4.</b>Explorateur de cibles, coupe sagittale schématique (l'avant du cerveau à gauche). Choisissez une cible pour afficher la trajectoire de l'électrode, le champ de stimulation et les données clés. Schéma en projection, pas à l'échelle : des structures situées à des profondeurs différentes se superposent.</figcaption>
+    <div class="chips" role="group" aria-label="Cible" id="tg-btns"></div>
+    <div class="svgscroll">
+    <svg id="anat" class="anat" viewBox="0 0 760 470" role="img" aria-label="Coupe sagittale schématique avec les cibles de stimulation">
+      <defs><radialGradient id="glow2"><stop offset="0" stop-color="#F2AA3F" stop-opacity=".85"/><stop offset=".55" stop-color="#F2AA3F" stop-opacity=".25"/><stop offset="1" stop-color="#F2AA3F" stop-opacity="0"/></radialGradient></defs>
+      <path d="M92,238 C88,128 196,46 350,42 C512,38 636,120 648,236 C654,300 626,338 566,350 C528,356 486,356 470,366 C448,382 432,420 420,456 L386,456 C384,420 374,394 356,380 C330,366 280,368 238,362 C150,352 96,310 92,238 Z" fill="#1B252B" stroke="#3A4852" stroke-width="1.5"/>
+      <path d="M212,196 C226,148 300,126 372,126 C452,126 512,152 526,194 C530,210 512,214 502,202 C488,166 436,148 372,148 C308,148 252,166 236,204 C230,216 208,212 212,196 Z" fill="#8C99A2" opacity=".45"/>
+      <path d="M240,210 C258,172 314,160 372,162 C430,164 484,178 496,204 C478,206 444,188 372,188 C318,188 270,200 252,226 Z" fill="#0A0F12"/>
+      <ellipse id="s-caud" class="st" cx="232" cy="228" rx="30" ry="20" fill="#5B6870"/>
+      <g id="s-alic" class="fib" opacity=".8" stroke="#4C88EA" fill="none" stroke-linecap="round">
+        <path class="band" d="M176,160 L318,280" stroke-width="18" opacity=".25"/>
+        <path d="M172,165 L314,285" stroke-width="1.6"/><path d="M176,160 L318,280" stroke-width="1.6"/><path d="M180,155 L322,275" stroke-width="1.6"/>
+      </g>
+      <ellipse id="s-nac" class="st" cx="250" cy="286" rx="30" ry="14" fill="#6B7880"/>
+      <ellipse id="s-thal" class="st" cx="424" cy="252" rx="58" ry="36" fill="#56636C"/>
+      <g id="s-itp" class="fib" opacity=".75" stroke="#35A56E" fill="none" stroke-linecap="round"><path d="M388,280 C372,294 352,306 320,320" stroke-width="2.4"/></g>
+      <circle id="s-ac" class="st" cx="326" cy="303" r="7" fill="#C9D1D6"/>
+      <ellipse id="s-bnst" class="st" cx="347" cy="289" rx="11" ry="7" fill="#8A969E"/>
+      <ellipse id="s-stn" class="st" cx="440" cy="318" rx="17" ry="7" transform="rotate(-18 440 318)" fill="#7F8B93"/>
+      <circle id="s-vta" class="st" cx="458" cy="346" r="5" fill="#7F8B93"/>
+      <g id="s-mfb" class="fib" opacity=".55" stroke="#35A56E" fill="none"><path d="M458,346 C410,322 340,282 186,166" stroke-width="2" stroke-dasharray="5 5"/></g>
+      <text x="372" y="116" text-anchor="middle">Corps calleux</text>
+      <text x="372" y="180" text-anchor="middle" font-size="13">ventricule latéral</text>
+      <text x="224" y="232" text-anchor="middle" class="lab-strong" font-size="13">Caudé</text>
+      <text x="250" y="291" text-anchor="middle" class="lab-strong" font-size="13">NAc</text>
+      <text x="424" y="257" text-anchor="middle" class="lab-strong">Thalamus</text>
+      <text x="150" y="120">Cortex préfrontal</text>
+      <text x="128" y="334">Cortex orbitofrontal</text>
+      <text x="60" y="458">antérieur</text>
+      <text x="700" y="458" text-anchor="end">postérieur</text>
+      <g id="lead-layer"></g>
+      <g id="lab-layer"></g>
+    </svg>
+    </div>
+    <div class="infobox" id="tg-card" aria-live="polite"></div>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Cible</th><th>Logique</th><th>Données clés</th><th>Réglages rapportés</th><th>CNS 2021</th></tr></thead>
+      <tbody>
+        <tr><td>VC/VS</td><td>Capsule ventrale et striatum ventral, héritière de la capsulotomie</td><td>26 patients (4 centres) ; 6 en aveugle à démarrage décalé ; base de l'autorisation HDE de la FDA (2009)</td><td>élevés : ≈ 3–8 V, 90–210 µs, 100–150 Hz</td><td>proche du NAc, niveau II</td></tr>
+        <tr><td>vALIC / NAc</td><td>Contact profond dans l'accumbens, contacts supérieurs dans la capsule</td><td>16 patients en essai croisé ; cohorte de 70 patients, 52 % de répondeurs à 12 mois</td><td>≈ 3–6 V, 90–150 µs, 130–180 Hz</td><td>niveau II</td></tr>
+        <tr><td>amSTN</td><td>Partie associative et limbique du noyau sous-thalamique</td><td>16 patients, essai croisé contre stimulation fictive (NEJM 2008)</td><td>faibles : ≈ 1–3 V ou mA, 60–90 µs, 130 Hz</td><td>niveau I</td></tr>
+        <tr><td>BNST</td><td>Amygdale étendue, anxiété soutenue</td><td>24 patients (Louvain) ; essai contre stimulation fictive de 9 patients</td><td>≈ 3–6 V, 90–210 µs, 130 Hz</td><td>niveau II</td></tr>
+        <tr><td>ITP</td><td>Faisceau thalamo-orbitofrontal</td><td>petites séries, 5 patients ou moins</td><td>variables</td><td>données insuffisantes</td></tr>
+        <tr><td>slMFB</td><td>Fibres de l'aire tegmentale ventrale vers le préfrontal</td><td>cas isolés</td><td>variables</td><td>données insuffisantes</td></tr>
+      </tbody>
+      <caption>Réglages : ordres de grandeur tirés de la littérature, pas des consignes. Confiance moyenne sur les fourchettes, faible pour ITP et slMFB. Sources : voir les fiches de la planche 4 et <cite data-r="staudt2021"></cite>.</caption>
+    </table>
+  </div>
+
+  <div class="txt">
+    <h3>Comparer les cibles entre elles</h3>
+    <p>Les comparaisons directes sont rares et minuscules. Chez 6 patients implantés à la fois dans la capsule ventrale et dans le NST antéro-médian, les deux cibles réduisaient les symptômes de façon comparable, mais avec des profils dissociables : davantage d'effet sur l'humeur pour la capsule, sur la flexibilité cognitive pour le NST <cite data-r="tyagi2019"></cite>. Une équipe parisienne a comparé en croisé randomisé le NST, l'accumbens et le caudé <cite data-r="welter2021"></cite> <span class="conf c2">confiance moyenne</span> : je n'ai pas revérifié le détail de ses résultats. D'autres ont implanté plusieurs zones striatales et choisi la meilleure pour chaque patient, guidés par l'imagerie <cite data-r="barcia2019"></cite>.</p>
+    <div class="note assume">
+      <h4>Hypothèse cachée</h4>
+      <p>« Pas de différence entre cibles » peut refléter une vraie équivalence, ou simplement le manque de puissance statistique : avec quelques dizaines de patients par cible, une différence cliniquement importante passerait inaperçue.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="chap" id="c5" data-title="Ce que disent les preuves" hidden>
+  <header class="chap-head"><span class="chap-num">5</span><h2>Ce que disent les preuves</h2><p>Essais randomisés, cohortes et méta-analyses : ce qui est démontré, et l'écart entre l'effet ouvert et l'effet contrôlé.</p></header>
+  <div class="txt">
+    <h3 style="margin-top:0">Des plans d'étude particuliers</h3>
+    <p>Comparer une stimulation à un placebo pose un problème : l'électrode est déjà implantée. La plupart des essais utilisent donc un plan <strong>croisé</strong> (périodes active et fictive dans un ordre tiré au sort, chez les mêmes patients) ou un <strong>démarrage décalé</strong> (activation différée et en aveugle). Deux faiblesses en découlent : l'aveugle est fragile, car les effets aigus se sentent, et les périodes fictives sont courtes, souvent quelques semaines à trois mois.</p>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Source</th><th>Type</th><th>Patients</th><th>Résultat principal</th><th>Lecture critique</th></tr></thead>
+      <tbody>
+        <tr><td>Mallet 2008 <cite data-r="mallet2008"></cite></td><td>Essai croisé, double aveugle, contre fictif</td><td>16</td><td>Y-BOCS 30 à l'inclusion ; 28 après 3 mois fictifs ; 19 après 3 mois actifs</td><td>Seul essai de classe I, petit ; événements indésirables graves notables</td></tr>
+        <tr><td>Denys 2010 <cite data-r="denys2010"></cite></td><td>Ouvert puis phase croisée en aveugle</td><td>16</td><td>Baisse d'environ 46 % en phase ouverte, 9 répondeurs sur 16 ; écart d'environ 8 points entre actif et fictif <span class="conf c2">confiance moyenne</span></td><td>Chiffres cités de mémoire, non revérifiés</td></tr>
+        <tr><td>Denys 2020 <cite data-r="denys2020"></cite></td><td>Cohorte ouverte</td><td>70</td><td>−13,5 points (−40 %) à 12 mois ; 52 % répondeurs, 17 % partiels, 31 % non-répondeurs ; HAM-A −55 %, HAM-D −54 %</td><td>Vraie vie dans un centre expert, sans groupe contrôle</td></tr>
+        <tr><td>Alonso 2015 <cite data-r="alonso2015"></cite></td><td>Méta-analyse</td><td>116 (31 études)</td><td>−45,1 % ; 60 % répondeurs ; pas de différence entre cibles</td><td>Surtout des études ouvertes</td></tr>
+        <tr><td>Gadot 2022 <cite data-r="gadot2022"></cite></td><td>Méta-analyse</td><td>34 études dont 9 essais randomisés</td><td>−47 % ; 66 % répondeurs</td><td>Forte hétérogénéité</td></tr>
+        <tr><td>Cohen 2025 <cite data-r="cohen2025"></cite></td><td>Méta-analyse sur données individuelles, essais contre fictif</td><td>91 (9 essais)</td><td>−5,1 points vs fictif (IC 95 % 2,0 à 8,1) ; g = 0,56 ; OR 4,7 ; NNT 3,9 ; qualité GRADE faible</td><td>Meilleure estimation de l'effet causal à court terme</td></tr>
+        <tr><td>Thavarajasingam 2026 <cite data-r="thava2026"></cite></td><td>Méta-analyse des prédicteurs</td><td>296 (28 études)</td><td>−40 % (IC 95 % −46,7 à −35,3) ; sévérité initiale prédit la réponse, antipsychotiques la non-réponse</td><td>Associations, pas causalité</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="plate">
+    <figcaption class="plate-cap"><b>Planche 5.</b>Même traitement, chiffres très différents selon la question posée. Basculez entre la baisse du score et le taux de répondeurs.</figcaption>
+    <div class="chips" role="group" aria-label="Indicateur" id="ev-modes">
+      <button class="chip" type="button" data-ev="red" aria-pressed="true">Baisse du score Y-BOCS</button>
+      <button class="chip" type="button" data-ev="resp" aria-pressed="false">Taux de répondeurs</button>
+    </div>
+    <div class="bars" id="ev-bars"></div>
+    <p class="muted small" id="ev-note" style="margin:12px 0 0"></p>
+    <h4 style="margin:26px 0 6px;color:var(--film-ink)">Que veut dire NNT 3,9 ?</h4>
+    <p class="small" style="margin:0 0 10px;max-width:70ch">Sur 100 patients, voici des proportions de répondeurs cohérentes avec l'odds ratio (4,7) et le NNT (3,9) publiés : environ 11 sous stimulation fictive et 37 sous stimulation active, soit un répondeur de plus pour 4 patients traités. <span class="conf c1">confiance faible</span> Reconstruction de ma part à partir de ces deux chiffres, pas des données de l'article.</p>
+    <div class="icons">
+      <div><p class="small muted" style="margin:0 0 6px">Stimulation fictive : ≈ 11 / 100</p><div class="iconarr sham" id="ic-sham"></div></div>
+      <div><p class="small muted" style="margin:0 0 6px">Stimulation active : ≈ 37 / 100</p><div class="iconarr" id="ic-act"></div></div>
+    </div>
+  </figure>
+
+  <div class="txt">
+    <h3>Pourquoi 40 % en ouvert, mais 5 points contre fictif ?</h3>
+    <p>Rapportés à un score initial d'environ 33, 5,1 points représentent à peu près 15 %, soit bien moins que les 40 à 47 % des séries ouvertes. L'écart a plusieurs sources, et elles ne jouent pas toutes dans le même sens.</p>
+    <p><strong>Ce qui gonfle les chiffres ouverts :</strong> les attentes et l'alliance thérapeutique (visites tous les quinze jours pendant des mois), la régression vers la moyenne (on opère au pire moment), le temps, et les co-interventions comme l'EPR.</p>
+    <p><strong>Ce qui peut sous-estimer l'effet contrôlé :</strong> des phases fictives courtes pour un effet qui se construit en mois, un effet de report dans les plans croisés, et des réglages pas encore optimisés. D'ailleurs, les essais qui ajustaient les paramètres progressivement montraient un effet plus grand <cite data-r="cohen2025"></cite>.</p>
+    <p><span class="conf c2">confiance moyenne</span> La vérité se situe probablement entre les deux : un effet spécifique réel, plus modeste à court terme que ne le suggèrent les cohortes, et dont la part à long terme reste mal connue.</p>
+
+    <h3>Qui répond le mieux ?</h3>
+    <p>Aucun prédicteur ne permet de sélectionner les patients individuellement, mais plusieurs associations reviennent :</p>
+    <ul>
+      <li>une <strong>sévérité initiale élevée</strong> prédit une meilleure réponse à long terme ; la <strong>prise d'antipsychotiques</strong> est associée à la non-réponse <cite data-r="thava2026"></cite> (probablement un marqueur de sévérité ou de comorbidité plutôt qu'une cause) ;</li>
+      <li>les symptômes de <strong>symétrie, d'accumulation et de perfectionnisme</strong> sont associés à une moindre amélioration initiale ; les pensées intrusives agressives et le trio anxiété, peur, évitement à une meilleure réponse <cite data-r="thava2026"></cite> ;</li>
+      <li>un <strong>début tardif</strong> du trouble et les obsessions <strong>sexuelles ou religieuses</strong> étaient associés à une meilleure réponse dans une méta-analyse plus ancienne <cite data-r="alonso2015"></cite> ;</li>
+      <li>un <strong>bon insight</strong> était le seul prédicteur individuel significatif dans la cohorte d'Amsterdam (valeur prédictive positive 84 %, négative 44 %), et les auteurs concluent que ces facteurs ne doivent pas servir à exclure des patients <cite data-r="graat2021jcp"></cite>.</li>
+    </ul>
+
+    <h3>Statut et recommandations</h3>
+    <ul>
+      <li><strong>États-Unis.</strong> Exemption humanitaire (HDE) accordée par la FDA en 2009 à un système de stimulation de la capsule pour le TOC chronique, sévère et résistant <span class="conf c3">confiance forte</span>. Recommandations neurochirurgicales de 2014, mises à jour en 2021 : niveau I pour le NST bilatéral par rapport au meilleur traitement médical, niveau II pour l'accumbens ou le BNST, pas de cible optimale identifiée <cite data-r="hamani2014,staudt2021"></cite>.</li>
+      <li><strong>Europe.</strong> Marquage CE obtenu la même année pour cette indication <span class="conf c2">confiance moyenne</span>.</li>
+      <li><strong>Royaume-Uni.</strong> Le NICE a jugé en 2021 les preuves d'efficacité de qualité insuffisante pour un usage courant <cite data-r="nice2021,thava2026"></cite> et réserve la procédure à un cadre de recherche <span class="conf c2">confiance moyenne</span>.</li>
+      <li><strong>Le débat.</strong> Pour certains experts, la stimulation est désormais un traitement établi <cite data-r="wu2021"></cite> ; d'autres décrivent une crise d'accès <cite data-r="vv2022"></cite> et s'interrogent sur son faible impact en pratique <cite data-r="mocking2021"></cite>.</li>
+    </ul>
+
+    <h3>Et à long terme ?</h3>
+    <p>Les suivis prolongés, jusqu'à 4 à 8 ans, décrivent un maintien de l'effet chez une partie des répondeurs et une qualité de vie améliorée <cite data-r="graat2021,mallet2019,chabardes2020,winter2021"></cite>. Mais ce sont des études ouvertes, avec des perdus de vue, des réglages modifiés en cours de route et des traitements associés. <span class="conf c2">confiance moyenne</span></p>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="chap" id="c6" data-title="Le parcours du patient" hidden>
+  <header class="chap-head"><span class="chap-num">6</span><h2>Le parcours du patient</h2><p>De l'indication au suivi au long cours : qui intervient, quand, et avec quels outils.</p></header>
+  <div class="txt">
+    <p>L'indication se pose en centre expert, après une évaluation pluridisciplinaire et, selon le consensus international, avec l'avis d'une instance indépendante de l'équipe qui opère <cite data-r="nuttin2014"></cite>. Testez d'abord les critères habituels des essais.</p>
+  </div>
+
+  <figure class="plate">
+    <figcaption class="plate-cap"><b>Planche 6.</b>Critères d'éligibilité typiques des essais. Cochez ce qui s'applique au profil étudié. Les critères varient selon les centres ; outil pédagogique uniquement.</figcaption>
+    <div class="checks" id="elig">
+      <h4>Critères d'inclusion</h4>
+      <label><input type="checkbox" data-inc>Diagnostic principal de TOC confirmé par un psychiatre expert</label>
+      <label><input type="checkbox" data-inc>Score Y-BOCS ≥ 28 (sévère à extrême)</label>
+      <label><input type="checkbox" data-inc>Évolution d'au moins 5 ans</label>
+      <label><input type="checkbox" data-inc>Retentissement fonctionnel majeur (par exemple EGF ≤ 45)</label>
+      <label><input type="checkbox" data-inc>Échec d'au moins 3 inhibiteurs de recapture à dose maximale tolérée, 12 semaines ou plus, dont la clomipramine</label>
+      <label><input type="checkbox" data-inc>Échec d'une augmentation par antipsychotique</label>
+      <label><input type="checkbox" data-inc>EPR adéquate conduite par un thérapeute expérimenté, sans réponse suffisante</label>
+      <label><input type="checkbox" data-inc>Âge ≥ 18 ans, consentement éclairé, capacité à suivre des mois de réglages</label>
+      <h4>Critères d'exclusion</h4>
+      <label><input type="checkbox" data-exc>Trouble psychotique actuel ou passé</label>
+      <label><input type="checkbox" data-exc>Abus ou dépendance actifs à une substance</label>
+      <label><input type="checkbox" data-exc>Risque suicidaire aigu non stabilisé</label>
+      <label><input type="checkbox" data-exc>Contre-indication à la chirurgie ou à l'IRM</label>
+      <label><input type="checkbox" data-exc>Trouble de la personnalité sévère compromettant le suivi (critère débattu)</label>
+    </div>
+    <p class="verdict" id="elig-out" aria-live="polite" style="margin-top:14px"></p>
+    <p class="muted small" style="margin-top:8px">Sources des critères : <cite data-r="mallet2008,denys2020,nuttin2014,graat2021jcp"></cite> <span class="conf c2">confiance moyenne</span></p>
+  </figure>
+
+  <div class="txt"><h3>Les étapes</h3><p>Ouvrez chaque étape pour le détail. Les durées sont des ordres de grandeur.</p></div>
+  <ol class="steps">
+    <li><details><summary><b>Repérage et adressage</b><span class="when">avant M−6</span></summary><div class="body txt">
+      <p>Le psychiatre traitant vérifie la réalité de la résistance (doses, durées, qualité de l'EPR) et adresse à un centre qui dispose d'une équipe de psychiatrie et de neurochirurgie fonctionnelle habituées à travailler ensemble. Une EPR intensive, voire résidentielle, est souvent proposée avant toute décision chirurgicale.</p></div></details></li>
+    <li><details><summary><b>Évaluation pluridisciplinaire</b><span class="when">M−6 à M−1</span></summary><div class="body txt">
+      <p>Psychiatre, neurochirurgien, neurologue, neuropsychologue, psychologue spécialisé en TCC, parfois éthicien. Échelles standardisées (Y-BOCS, HAM-D, HAM-A, EGF), bilan neuropsychologique (fonctions exécutives, mémoire), IRM à haut champ, parfois tractographie. Le dossier est soumis à une commission ou à un second avis indépendant <cite data-r="nuttin2014"></cite>.</p></div></details></li>
+    <li><details><summary><b>Consentement éclairé</b><span class="when">M−1</span></summary><div class="body txt">
+      <p>Exposer des bénéfices réalistes (environ un patient sur deux répondeur, rarement une rémission), les risques chirurgicaux et psychiatriques, la dépendance au matériel (batterie, recharge, remplacements), l'engagement dans un suivi rapproché de plusieurs mois, et l'existence d'alternatives, notamment la capsulotomie. Associer les proches est recommandé.</p></div></details></li>
+    <li><details><summary><b>Chirurgie</b><span class="when">J0</span></summary><div class="body txt">
+      <p>Cadre stéréotaxique ou robot, fusion IRM et scanner, planification d'une trajectoire qui évite sillons, vaisseaux et ventricules. Deux trous de trépan, pose bilatérale des électrodes. Selon la cible : tests peropératoires chez le patient éveillé (effets aigus sur l'humeur et l'anxiété pour la capsule) ou microenregistrements (NST). Le stimulateur est implanté sous la clavicule dans le même temps ou quelques jours plus tard ; un scanner vérifie la position. Hospitalisation de quelques jours. <span class="conf c2">confiance moyenne</span> sur les durées, qui varient selon les centres.</p></div></details></li>
+    <li><details><summary><b>Effet de microlésion</b><span class="when">J1 à S3</span></summary><div class="body txt">
+      <p>L'insertion de l'électrode produit parfois une amélioration transitoire, sans stimulation, qui s'estompe en quelques jours ou semaines. Il ne faut pas la confondre avec l'effet thérapeutique ; on attend en général sa disparition avant la première programmation.</p></div></details></li>
+    <li><details><summary><b>Activation et optimisation</b><span class="when">S2 à M6–M12</span></summary><div class="body txt">
+      <p>Revue monopolaire des contacts, puis augmentation progressive. À Amsterdam, les patients étaient revus toutes les deux semaines pendant la phase d'optimisation <cite data-r="denys2020"></cite>. Les stratégies d'ajustement graduel semblent associées à un meilleur résultat <cite data-r="cohen2025,vanwesten2021"></cite>. Détails au chapitre 7.</p></div></details></li>
+    <li><details><summary><b>Thérapie après stimulation</b><span class="when">M3 à M9 environ</span></summary><div class="body txt">
+      <p>Quand l'anxiété baisse, l'EPR redevient possible. Une étude a montré qu'une TCC ajoutée après l'implantation apportait une amélioration supplémentaire <cite data-r="mantione2014"></cite>. La stimulation ouvre une fenêtre ; la thérapie la met à profit.</p></div></details></li>
+    <li><details><summary><b>Suivi au long cours</b><span class="when">au-delà de M12</span></summary><div class="body txt">
+      <p>Consultations espacées (tous les 3 à 6 mois), contrôles du matériel, recharge ou remplacement anticipé du boîtier, carte de porteur, précautions pour l'IRM. La réadaptation psychosociale compte autant que les réglages : retour au travail, redistribution des rôles familiaux, deuil des années perdues.</p></div></details></li>
+  </ol>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="chap" id="c7" data-title="Programmer la stimulation" hidden>
+  <header class="chap-head"><span class="chap-num">7</span><h2>Programmer la stimulation</h2><p>Principes de réglage, effets aigus à surveiller, et un simulateur pour comprendre la physique.</p></header>
+  <div class="txt">
+    <h3 style="margin-top:0">Les principes</h3>
+    <ul>
+      <li><strong>Attendre</strong> la fin de l'effet de microlésion (quelques semaines).</li>
+      <li><strong>Revue monopolaire</strong> : tester chaque contact séparément en montant l'amplitude par petits paliers (par exemple 0,5 V), noter les effets aigus positifs (détente, humeur, élan, sourire) et indésirables (anxiété, panique, bouffée de chaleur, goût ou odeur, paresthésies, effets moteurs), et repérer la fenêtre entre les deux.</li>
+      <li><strong>Selon la cible</strong> : dans la capsule et le striatum ventral, la réponse aiguë de l'humeur et de l'anxiété guide le choix du contact, avec des amplitudes élevées ; dans le NST, amplitudes faibles et vigilance sur l'hypomanie et les effets moteurs.</li>
+      <li><strong>Monter lentement</strong>, réévaluer Y-BOCS, HAM-D et HAM-A, et ne pas « courir après l'euphorie » aiguë, qui annonce souvent l'hypomanie.</li>
+      <li><strong>Compter en mois</strong> : l'optimisation dure souvent 6 à 12 mois ; les approches graduelles donnent de meilleurs résultats <cite data-r="cohen2025,vanwesten2021"></cite>.</li>
+    </ul>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Situation</th><th>Cause probable</th><th>Conduite habituelle</th></tr></thead>
+      <tbody>
+        <tr><td>Hypomanie : sommeil réduit, dépenses, logorrhée</td><td>Amplitude trop élevée ou contact trop ventral</td><td>Baisser l'amplitude ou changer de contact ; surveillance rapprochée ; parfois thymorégulateur</td></tr>
+        <tr><td>Anxiété ou panique aiguë à l'augmentation</td><td>Diffusion vers des fibres ou structures voisines</td><td>Revenir au palier précédent, tester un autre contact</td></tr>
+        <tr><td>Goût métallique, odeur, sudation, bouffée de chaleur</td><td>Diffusion du courant</td><td>Réduire l'amplitude ou la durée d'impulsion, changer de configuration</td></tr>
+        <tr><td>Aucun effet après plusieurs mois</td><td>Position sous-optimale, mauvais contact, paramètres insuffisants</td><td>Vérifier impédances et position sur l'imagerie, essayer d'autres contacts, le mode bipolaire, une durée d'impulsion plus longue ; rediscuter l'indication</td></tr>
+        <tr><td>Aggravation brutale après une période stable</td><td>Batterie vide, boîtier éteint, fracture d'électrode</td><td>Contrôle du boîtier et des impédances en urgence ; rebond possible en heures à jours <cite data-r="ooms2014"></cite></td></tr>
+      </tbody>
+      <caption>Synthèse pédagogique de pratiques rapportées. <span class="conf c2">confiance moyenne</span></caption>
+    </table>
+  </div>
+
+  <figure class="plate" id="sim">
+    <figcaption class="plate-cap"><b>Planche 7.</b>Simulateur de paramètres. Modifiez amplitude, durée d'impulsion, fréquence, impédance et type de contact pour voir la charge délivrée, la densité de charge, l'énergie consommée et un rayon d'activation indicatif.</figcaption>
+    <div class="chips" role="group" aria-label="Préréglages" id="sim-presets">
+      <button class="chip" type="button" data-p="vcvs" aria-pressed="true">Capsule (VC/VS)</button>
+      <button class="chip" type="button" data-p="stn" aria-pressed="false">NST antéro-médian</button>
+      <button class="chip" type="button" data-p="pd" aria-pressed="false">Référence Parkinson</button>
+    </div>
+    <div class="sim">
+      <div class="ctrl">
+        <label>Mode
+          <select id="s-mode"><option value="V">Tension imposée (V)</option><option value="mA">Courant imposé (mA)</option></select>
+        </label>
+        <label><span class="row"><span>Amplitude</span><output id="o-amp"></output></span><input type="range" id="s-amp" min="0" max="8" step="0.1"></label>
+        <label><span class="row"><span>Durée d'impulsion</span><output id="o-pw"></output></span><input type="range" id="s-pw" min="30" max="450" step="10"></label>
+        <label><span class="row"><span>Fréquence</span><output id="o-f"></output></span><input type="range" id="s-f" min="2" max="250" step="1"></label>
+        <label><span class="row"><span>Impédance</span><output id="o-z"></output></span><input type="range" id="s-z" min="400" max="2000" step="50"></label>
+        <label>Contacts
+          <select id="s-lead"><option value="1.5">1,5 mm (surface ≈ 0,06 cm²)</option><option value="3">3 mm (surface ≈ 0,12 cm²)</option></select>
+        </label>
+        <div><span class="small" style="color:var(--film-muted)">Contact actif</span>
+          <div class="chips" role="group" aria-label="Contact actif" id="s-contacts" style="margin-top:6px"></div>
+        </div>
+      </div>
+      <div>
+        <svg id="s-lead-svg" viewBox="0 0 300 300" role="img" aria-label="Électrode et rayon d'activation indicatif" style="width:100%;height:auto;display:block;background:var(--film-2);border-radius:6px"></svg>
+        <svg id="s-wave" viewBox="0 0 360 110" role="img" aria-label="Train d'impulsions sur 30 millisecondes" style="width:100%;height:auto;display:block;margin-top:10px;background:var(--film-2);border-radius:6px"></svg>
+      </div>
+    </div>
+    <div class="sim-out" id="sim-out" aria-live="polite"></div>
+    <p class="alert" id="sim-alert" hidden></p>
+    <p class="muted small" style="margin-top:12px">Calculs : courant = tension / impédance ; charge par phase = courant × durée ; densité = charge / surface du contact (électrode de 1,27 mm de diamètre) ; énergie par seconde (TEED) = V² × fréquence × durée / impédance <cite data-r="koss2005"></cite>. Le rayon d'activation vient d'une relation courant-distance simplifiée de type I = K·r² <cite data-r="ranck1975"></cite>, calibrée arbitrairement : <span class="conf c1">confiance faible</span>, ordre de grandeur pédagogique seulement. Les vrais modèles de volume activé sont bien plus complexes <cite data-r="patrick2024"></cite>. Seuil de densité de charge de 30 µC/cm² par phase : limite couramment citée pour les systèmes de stimulation cérébrale profonde <span class="conf c2">confiance moyenne</span>.</p>
+  </figure>
+
+  <div class="note key">
+    <h4>Pourquoi des boîtiers rechargeables</h4>
+    <p>L'énergie délivrée croît avec le carré de la tension et linéairement avec la durée d'impulsion. Un réglage capsulaire à 5 V, 210 µs et 130 Hz consomme environ 14 fois plus qu'un réglage Parkinson à 2,5 V, 60 µs et 130 Hz (682 contre 49 µW par électrode à 1 000 Ω). Les premiers patients traités dans la capsule usaient leurs boîtiers non rechargeables en quelques mois à deux ans <span class="conf c2">confiance moyenne</span>, d'où le recours fréquent aux modèles rechargeables.</p>
+  </div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="chap" id="c8" data-title="Sécurité et effets indésirables" hidden>
+  <header class="chap-head"><span class="chap-num">8</span><h2>Sécurité et effets indésirables</h2><p>Ce qui relève de la chirurgie, du matériel, de la stimulation, et le risque propre à l'arrêt brutal.</p></header>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Type</th><th>Exemples</th><th>Ordre de grandeur</th><th>Réversible</th><th>Confiance</th></tr></thead>
+      <tbody>
+        <tr><td>Chirurgical</td><td>Hémorragie intracérébrale, infection, crise d'épilepsie, mauvais positionnement</td><td>Hémorragie autour de 1 à 2 % par patient, infection de quelques pour cent, dans l'ensemble de la stimulation profonde <cite data-r="bouwens2022"></cite></td><td>Variable ; séquelles possibles</td><td><span class="conf c2">moyenne</span></td></tr>
+        <tr><td>Matériel</td><td>Fracture ou migration d'électrode, érosion cutanée, panne ou épuisement du boîtier</td><td>Fréquent sur des années de suivi</td><td>Oui, au prix d'une réintervention</td><td><span class="conf c2">moyenne</span></td></tr>
+        <tr><td>Lié à la stimulation</td><td>Hypomanie (le plus fréquent), agitation, impulsivité, troubles du sommeil, anxiété, difficultés cognitives, sensations de goût ou d'odeur</td><td>Fréquent, souvent transitoire <cite data-r="denys2020,cohen2025,thava2026"></cite></td><td>En général, par ajustement</td><td><span class="conf c3">forte</span></td></tr>
+        <tr><td>Arrêt brutal</td><td>Rebond anxieux et dépressif, retour des obsessions</td><td>Rapide, en heures à jours <cite data-r="ooms2014"></cite></td><td>Oui, à la reprise</td><td><span class="conf c2">moyenne</span></td></tr>
+        <tr><td>Suicide</td><td>Idées, tentatives, décès rapportés dans plusieurs études</td><td>Rare ; lien causal non établi dans une population à haut risque de base <cite data-r="thava2026"></cite></td><td>·</td><td><span class="conf c2">moyenne</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="txt">
+    <p>L'essai français de 2008 illustre le poids de ces risques : sur les 16 patients, les auteurs rapportaient un nombre élevé d'événements indésirables graves, dont une hémorragie intracérébrale et deux infections <cite data-r="mallet2008"></cite> <span class="conf c2">confiance moyenne</span> sur le décompte exact.</p>
+    <div class="note warn">
+      <h4>Le risque de l'arrêt</h4>
+      <p>Un patient répondeur devient dépendant de son matériel. Batterie non rechargée, boîtier en fin de vie, électrode fracturée : les symptômes peuvent revenir en quelques heures ou jours, parfois avec une chute d'humeur marquée <cite data-r="ooms2014"></cite>. Conséquences pratiques : éducation à la recharge, remplacement anticipé des boîtiers non rechargeables, carte de porteur, et accès rapide au centre.</p>
+    </div>
+    <h3>Vivre avec un stimulateur</h3>
+    <ul>
+      <li><strong>IRM</strong> uniquement dans les conditions définies par le fabricant pour le système implanté.</li>
+      <li><strong>Diathermie</strong> (chaleur profonde par ondes courtes ou micro-ondes) contre-indiquée.</li>
+      <li><strong>Portiques de sécurité</strong> et aimants puissants : présenter sa carte, éviter de stationner dans le champ.</li>
+      <li><strong>Bistouri électrique</strong> lors d'une autre chirurgie : prévenir l'équipe, qui adapte la technique.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="chap" id="c9" data-title="Controverses et alternatives" hidden>
+  <header class="chap-head"><span class="chap-num">9</span><h2>Controverses, éthique et alternatives</h2><p>Les faiblesses du dossier, le meilleur argument de chaque camp, et ce qui ferait changer d'avis.</p></header>
+  <div class="txt">
+    <h3 style="margin-top:0">Les trois faiblesses principales du dossier</h3>
+    <ol>
+      <li><strong>Des effectifs minuscules.</strong> Neuf essais contre stimulation fictive et 91 patients au total ; qualité de preuve jugée faible, hétérogénéité élevée <cite data-r="cohen2025"></cite>.</li>
+      <li><strong>Un aveugle fragile et des phases fictives courtes.</strong> Les effets aigus trahissent souvent la condition active ; les phases de quelques semaines ne disent rien de l'effet à plusieurs années.</li>
+      <li><strong>Des chiffres de long terme ouverts.</strong> Les taux de 50 à 66 % de répondeurs viennent de cohortes non contrôlées, dans des centres experts très sélectionnés, avec des co-traitements.</li>
+    </ol>
+  </div>
+
+  <div class="cols">
+    <div class="pro">
+      <h4>Le meilleur argument pour</h4>
+      <ul>
+        <li>Le TOC réfractaire extrême est dévastateur, avec un risque suicidaire réel et des décennies de vie perdues.</li>
+        <li>L'effet contre fictif est significatif (OR 4,7, NNT 3,9), un NNT comparable ou meilleur que celui de nombreux traitements psychiatriques admis <cite data-r="cohen2025"></cite>.</li>
+        <li>C'est réglable et réversible, contrairement à une lésion.</li>
+        <li>L'humeur et l'anxiété s'améliorent aussi, parfois plus que le TOC lui-même (HAM-D −54 % à Amsterdam) <cite data-r="denys2020"></cite>.</li>
+        <li>Niveau I des recommandations neurochirurgicales américaines pour le NST <cite data-r="staudt2021"></cite>.</li>
+      </ul>
+    </div>
+    <div class="con">
+      <h4>Le meilleur argument contre</h4>
+      <ul>
+        <li>L'effet causal mesuré est modeste, environ 5 points de Y-BOCS, avec une qualité de preuve faible <cite data-r="cohen2025"></cite>.</li>
+        <li>C'est une chirurgie intracrânienne, avec un matériel à vie, des remplacements et un risque de rebond à l'arrêt.</li>
+        <li>La capsulotomie donne des résultats du même ordre dans les séries ouvertes, sans matériel et pour un coût moindre <cite data-r="pepper2015,lai2020"></cite> <span class="conf c2">confiance moyenne</span>.</li>
+        <li>Le niveau I repose essentiellement sur un seul essai de 16 patients.</li>
+        <li>Réversible en théorie, mais pas l'expérience vécue ni la dépendance au dispositif <cite data-r="pugh2019"></cite>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="txt">
+    <h3>Hypothèses cachées qui, si elles sont fausses, font vaciller l'analyse</h3>
+    <ul>
+      <li><strong>La Y-BOCS mesure ce qui compte.</strong> Si le patient tient surtout au travail, aux relations et à l'autonomie, un gain de 5 points peut surestimer ou sous-estimer le bénéfice réel.</li>
+      <li><strong>Les patients des essais ressemblent au vôtre.</strong> Ils sont très sélectionnés, suivis dans des centres experts, avec une forte motivation.</li>
+      <li><strong>La résistance était réelle</strong>, EPR comprise (voir chapitre 1).</li>
+      <li><strong>L'accès au suivi est garanti à vie</strong> : programmation, recharge, remplacements, urgences. Sans cela, le bénéfice se retourne en risque.</li>
+      <li><strong>L'effet mesuré sur 3 mois s'extrapole aux années.</strong> Rien ne le garantit, ni dans un sens ni dans l'autre.</li>
+    </ul>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Option</th><th>Invasivité</th><th>Réversible</th><th>Niveau de preuve</th><th>Principaux risques</th></tr></thead>
+      <tbody>
+        <tr><td>EPR intensive ou résidentielle</td><td>Aucune</td><td>·</td><td>Élevé pour le TOC en général ; peu évalué dans les formes extrêmes</td><td>Abandon, épuisement</td></tr>
+        <tr><td>Stimulation magnétique transcrânienne profonde</td><td>Non invasive</td><td>Oui</td><td>Essai randomisé contre simulation <cite data-r="carmi2019"></cite> ; formes moins sévères</td><td>Céphalées, rare crise d'épilepsie</td></tr>
+        <tr><td>Stimulation cérébrale profonde</td><td>Neurochirurgie + matériel implanté</td><td>Oui, réglable</td><td>9 essais contre fictif, 91 patients, qualité faible <cite data-r="cohen2025"></cite></td><td>Chirurgie, matériel, hypomanie, rebond à l'arrêt</td></tr>
+        <tr><td>Capsulotomie par radiofréquence ou Gamma Knife</td><td>Lésion (Gamma Knife sans ouverture du crâne)</td><td>Non</td><td>Un petit essai contre simulation (Gamma Knife) <cite data-r="lopes2014"></cite> ; séries ouvertes <cite data-r="lai2020"></cite></td><td>Irréversibilité ; apathie ou troubles exécutifs dans certaines séries <cite data-r="ruck2008"></cite> ; œdème, kystes</td></tr>
+        <tr><td>Capsulotomie par ultrasons focalisés guidés par IRM</td><td>Lésion sans incision</td><td>Non</td><td>Séries pilotes de quelques patients <cite data-r="jung2015"></cite> <span class="conf c1">faible</span></td><td>Irréversibilité ; recul limité</td></tr>
+      </tbody>
+      <caption>Comparaison indicative ; aucune comparaison randomisée directe entre stimulation profonde et capsulotomie à ma connaissance.</caption>
+    </table>
+  </div>
+
+  <div class="txt">
+    <h3>Les questions éthiques</h3>
+    <p>L'ombre de la lobotomie pèse encore sur la neurochirurgie psychiatrique. Les recommandations internationales imposent donc une équipe pluridisciplinaire, un avis indépendant, un consentement éclairé répété et une publication des résultats, y compris négatifs <cite data-r="nuttin2014"></cite>. Restent des questions ouvertes : la capacité à consentir quand la maladie envahit tout, l'effet de la stimulation sur le sentiment d'identité, la réversibilité réelle <cite data-r="pugh2019"></cite>, et l'équité d'accès, très inégale selon les pays <cite data-r="vv2022"></cite>.</p>
+
+    <div class="note key">
+      <h4>Mon verdict, et ce qui me ferait changer d'avis</h4>
+      <p>Pour un petit sous-groupe de patients très sévères et réellement réfractaires, EPR comprise, la stimulation profonde est une option raisonnable, réglable et réversible, avec un effet causal démontré mais modeste à court terme, et un bénéfice ouvert plus important dont la part spécifique reste incertaine. <span class="conf c2">confiance moyenne</span></p>
+      <p>Ce qui me ferait réviser vers le bas : un grand essai en groupes parallèles, avec une phase fictive d'au moins six mois, montrant moins de 3 points d'écart. Vers le haut : un écart supérieur à 8 points dans ce même type d'essai, ou une comparaison randomisée favorable face à la capsulotomie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="chap" id="c10" data-title="Cas clinique commenté" hidden>
+  <header class="chap-head"><span class="chap-num">10</span><h2>Cas clinique commenté</h2><p>Un an de parcours en six étapes, discuté par une psychiatre et un neurochirurgien.</p></header>
+  <div class="txt">
+    <p>Cas fictif composite, construit pour illustrer le parcours avec des chiffres plausibles. Les deux voix : <strong>Claire Vasseur</strong>, psychiatre, et <strong>Samir Haddad</strong>, neurochirurgien, en réunion de concertation.</p>
+  </div>
+  <figure class="plate">
+    <figcaption class="plate-cap"><b>Planche 8.</b>M. R., 38 ans. Avancez étape par étape ; la courbe suit son score Y-BOCS. Pointillés : seuils de réponse partielle (−25 %) et de réponse (−35 %).</figcaption>
+    <div class="case-steps chips" role="group" aria-label="Étapes du cas" id="case-steps"></div>
+    <svg id="case-chart" viewBox="0 0 520 230" role="img" aria-label="Évolution du score Y-BOCS" style="width:100%;height:auto;display:block;background:var(--film-2);border-radius:6px"></svg>
+    <div id="case-body"></div>
+    <div class="qnav" style="display:flex;justify-content:space-between;margin-top:14px;gap:10px">
+      <button class="btn ghost" type="button" id="case-prev">Étape précédente</button>
+      <button class="btn" type="button" id="case-next">Étape suivante</button>
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="chap" id="c11" data-title="Quiz" hidden>
+  <header class="chap-head"><span class="chap-num">11</span><h2>Quiz</h2><p>Douze questions pour vérifier ce qui est acquis. Chaque réponse est expliquée et référencée.</p></header>
+  <figure class="plate">
+    <figcaption class="plate-cap"><b>Planche 9.</b><span id="qz-prog"></span></figcaption>
+    <div class="quiz" id="quiz"></div>
+  </figure>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="chap" id="c12" data-title="Lexique et références" hidden>
+  <header class="chap-head"><span class="chap-num">12</span><h2>Lexique et références</h2><p>Les sigles du cours et la bibliographie complète.</p></header>
+  <div class="txt"><h3 style="margin-top:0">Lexique</h3></div>
+  <dl class="gloss">
+    <dt>ALIC, vALIC</dt><dd>Bras antérieur de la capsule interne (anterior limb of the internal capsule) ; v pour sa partie ventrale.</dd>
+    <dt>amSTN</dt><dd>Partie antéro-médiane, associative et limbique, du noyau sous-thalamique.</dd>
+    <dt>BNST</dt><dd>Noyau du lit de la strie terminale, partie de l'amygdale étendue.</dd>
+    <dt>CGI-I, CGI-S</dt><dd>Impressions cliniques globales d'amélioration et de sévérité, cotées de 1 à 7.</dd>
+    <dt>EGF (GAF)</dt><dd>Échelle d'évaluation globale du fonctionnement, de 0 à 100.</dd>
+    <dt>EPR</dt><dd>Exposition avec prévention de la réponse, cœur de la TCC du TOC.</dd>
+    <dt>GPe, GPi, SNr</dt><dd>Pallidum externe, pallidum interne, substance noire réticulée.</dd>
+    <dt>GRADE</dt><dd>Méthode de cotation de la qualité des preuves : élevée, modérée, faible, très faible.</dd>
+    <dt>HAM-A, HAM-D</dt><dd>Échelles de Hamilton pour l'anxiété et la dépression.</dd>
+    <dt>HDE</dt><dd>Humanitarian Device Exemption, autorisation américaine pour les dispositifs destinés à de petites populations.</dd>
+    <dt>ISRS, IRS</dt><dd>Inhibiteurs (sélectifs) de la recapture de la sérotonine.</dd>
+    <dt>ITP</dt><dd>Pédoncule thalamique inférieur.</dd>
+    <dt>NAc, VS, VC/VS</dt><dd>Noyau accumbens, striatum ventral, capsule ventrale et striatum ventral.</dd>
+    <dt>NNT</dt><dd>Nombre de patients à traiter pour obtenir un répondeur de plus qu'avec le comparateur.</dd>
+    <dt>NST</dt><dd>Noyau sous-thalamique.</dd>
+    <dt>SCP (DBS)</dt><dd>Stimulation cérébrale profonde (deep brain stimulation).</dd>
+    <dt>slMFB</dt><dd>Branche supérolatérale du faisceau médian du télencéphale.</dd>
+    <dt>TEED</dt><dd>Énergie électrique totale délivrée par unité de temps.</dd>
+    <dt>Volume activé</dt><dd>Estimation du tissu dont les fibres sont recrutées par la stimulation (VTA en anglais).</dd>
+    <dt>Y-BOCS</dt><dd>Échelle de Yale-Brown, de 0 à 40, référence pour mesurer la sévérité du TOC.</dd>
+  </dl>
+  <div class="txt">
+    <h3>Références</h3>
+    <p class="small muted">Chaque référence propose une recherche PubMed par titre et, quand je l'ai vérifié, le lien DOI. Les chiffres clés des sources marquées d'une confiance forte ont été contrôlés sur les résumés publiés.</p>
+  </div>
+  <ol id="reflist"></ol>
+</section>
+
+</main>
+</div>
+<div id="refpop" role="dialog" aria-label="Référence" hidden><button class="x" type="button" aria-label="Fermer">Fermer</button><div id="refpop-body"></div></div>
+<style>
+.edge.e-n{stroke:#8795A0}.edge.e-g{stroke:#35A56E}.edge.e-r{stroke:#E0554A}.edge.e-b{stroke:#4C88EA}
+.anat .fib.hl path:not(.band){stroke-width:3.2}.anat .fib.hl .band{opacity:.5}
+.anat .lead-field{transform-box:fill-box;transform-origin:center}
+@media (prefers-reduced-motion: no-preference){.anat .lead-field{animation:bloom .9s ease-out both}}
+.listen{display:flex;align-items:center;gap:12px;margin:-8px 0 28px;font-family:var(--sans);flex-wrap:wrap}
+.listen-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 16px 8px 12px;font-weight:650;font-size:14.5px;cursor:pointer}
+.listen-btn svg{width:15px;height:15px;fill:currentColor}
+.listen-btn:disabled{opacity:.45;cursor:not-allowed}
+.listen-dur{font-size:13.5px;color:var(--muted)}
+#tts-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(780px,calc(100% - 20px));background:var(--film);color:var(--film-ink);border:1px solid var(--film-line);border-radius:10px;box-shadow:0 12px 36px rgba(0,0,0,.32);padding:10px 14px 0;z-index:55;font-family:var(--sans);overflow:hidden}
+#tts-bar[hidden]{display:none}
+.tts-top{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;margin-bottom:8px}
+.tts-title{font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tts-pos{color:var(--film-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tts-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-bottom:10px}
+.tts-b{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--film-line);background:var(--film-2);color:var(--film-ink);cursor:pointer;padding:0}
+.tts-b svg{width:15px;height:15px;fill:currentColor}
+.tts-b.main{width:44px;height:44px;background:var(--amber);border-color:var(--amber);color:#1A1206}
+.tts-opt{font-size:13px;color:var(--film-muted);display:inline-flex;align-items:center;gap:6px}
+.tts-opt select{max-width:190px;padding:4px 6px;font-size:13px}
+.tts-opt input{accent-color:var(--amber)}
+.tts-prog{height:3px;background:var(--film-3);margin:0 -14px}
+.tts-prog i{display:block;height:100%;background:var(--amber);width:0;transition:width .3s}
+.tts-msg{font-size:12.5px;color:var(--film-muted);padding-bottom:8px}
+.tts-msg:empty{display:none}
+.tts-reading{background:var(--accent-soft);box-shadow:0 0 0 6px var(--accent-soft);border-radius:3px}
+.plate .tts-reading{background:rgba(242,170,63,.14);box-shadow:0 0 0 6px rgba(242,170,63,.14)}
+tr.tts-reading td{background:var(--accent-soft)}
+body.tts-on main{padding-bottom:200px}
+body.tts-on #refpop{bottom:calc(160px + env(safe-area-inset-bottom,0px))}
+@media (max-width:520px){.tts-opt select{max-width:140px}.tts-b{width:36px;height:36px}}
+</style>
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const fr=(n,d=1)=>Number(n).toLocaleString("fr-FR",{maximumFractionDigits:d,minimumFractionDigits:0});
+const SVGNS="http://www.w3.org/2000/svg";
+const el=(tag,attrs={},parent)=>{const e=document.createElementNS(SVGNS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;};
+
+/* ---------------- References ---------------- */
+const REFS=[
+{k:"goodman1989",a:"Goodman WK, Price LH, Rasmussen SA, et al.",ti:"The Yale-Brown Obsessive Compulsive Scale. I. Development, use, and reliability",so:"Arch Gen Psychiatry. 1989;46:1006-11"},
+{k:"mataixcols2016",a:"Mataix-Cols D, Fernández de la Cruz L, Nordsletten AE, et al.",ti:"Towards an international expert consensus for defining treatment response, remission, recovery and relapse in obsessive-compulsive disorder",so:"World Psychiatry. 2016;15:80-1"},
+{k:"pallanti2006",a:"Pallanti S, Quercioli L",ti:"Treatment-refractory obsessive-compulsive disorder: methodological issues, operational definitions and therapeutic lines",so:"Prog Neuropsychopharmacol Biol Psychiatry. 2006;30:400-12"},
+{k:"denys2006",a:"Denys D",ti:"Pharmacotherapy of obsessive-compulsive disorder and obsessive-compulsive spectrum disorders",so:"Psychiatr Clin North Am. 2006;29:553-84",doi:"10.1016/j.psc.2006.02.013"},
+{k:"skapinakis2016",a:"Skapinakis P, Caldwell DM, Hollingworth W, et al.",ti:"Pharmacological and psychotherapeutic interventions for management of obsessive-compulsive disorder in adults: a systematic review and network meta-analysis",so:"Lancet Psychiatry. 2016;3:730-9"},
+{k:"alexander1986",a:"Alexander GE, DeLong MR, Strick PL",ti:"Parallel organization of functionally segregated circuits linking basal ganglia and cortex",so:"Annu Rev Neurosci. 1986;9:357-81"},
+{k:"saxena2000",a:"Saxena S, Rauch SL",ti:"Functional neuroimaging and the neuroanatomy of obsessive-compulsive disorder",so:"Psychiatr Clin North Am. 2000;23:563-86"},
+{k:"milad2012",a:"Milad MR, Rauch SL",ti:"Obsessive-compulsive disorder: beyond segregated cortico-striatal pathways",so:"Trends Cogn Sci. 2012;16:43-51"},
+{k:"gillan2011",a:"Gillan CM, Papmeyer M, Morein-Zamir S, et al.",ti:"Disruption in the balance between goal-directed behavior and habit learning in obsessive-compulsive disorder",so:"Am J Psychiatry. 2011;168:718-26"},
+{k:"ahmari2013",a:"Ahmari SE, Spellman T, Douglass NL, et al.",ti:"Repeated cortico-striatal stimulation generates persistent OCD-like behavior",so:"Science. 2013;340:1234-9"},
+{k:"burguiere2013",a:"Burguière E, Monteiro P, Feng G, Graybiel AM",ti:"Optogenetic stimulation of lateral orbitofronto-striatal pathway suppresses compulsive behaviors",so:"Science. 2013;340:1243-6"},
+{k:"haber2021",a:"Haber SN, Yendiki A, Jbabdi S",ti:"Four deep brain stimulation targets for obsessive-compulsive disorder: are they different?",so:"Biol Psychiatry. 2021;90:667-77"},
+{k:"li2020",a:"Li N, Baldermann JC, Kibleur A, et al.",ti:"A unified connectomic target for deep brain stimulation in obsessive-compulsive disorder",so:"Nat Commun. 2020;11:3364",doi:"10.1038/s41467-020-16734-3"},
+{k:"baldermann2019",a:"Baldermann JC, Melzer C, Zapf A, et al.",ti:"Connectivity profile predictive of effective deep brain stimulation in obsessive-compulsive disorder",so:"Biol Psychiatry. 2019;85:735-43",doi:"10.1016/j.biopsych.2018.12.019"},
+{k:"meyer2024",a:"Meyer GM, Hollunder B, Li N, et al.",ti:"Deep brain stimulation for obsessive-compulsive disorder: optimal stimulation sites",so:"Biol Psychiatry. 2024;96:101-13"},
+{k:"widge2022",a:"Widge AS, Zhang F, Gosai A, et al.",ti:"Patient-specific connectomic models correlate with, but do not reliably predict, outcomes in deep brain stimulation for obsessive-compulsive disorder",so:"Neuropsychopharmacology. 2022;47:965-72",doi:"10.1038/s41386-021-01199-9"},
+{k:"ranck1975",a:"Ranck JB Jr",ti:"Which elements are excited in electrical stimulation of mammalian central nervous system: a review",so:"Brain Res. 1975;98:417-40"},
+{k:"mcintyre2004",a:"McIntyre CC, Savasta M, Kerkerian-Le Goff L, Vitek JL",ti:"Uncovering the mechanism(s) of action of deep brain stimulation: activation, inhibition, or both",so:"Clin Neurophysiol. 2004;115:1239-48"},
+{k:"herrington2016",a:"Herrington TM, Cheng JJ, Eskandar EN",ti:"Mechanisms of deep brain stimulation",so:"J Neurophysiol. 2016;115:19-38"},
+{k:"figee2013",a:"Figee M, Luigjes J, Smolders R, et al.",ti:"Deep brain stimulation restores frontostriatal network activity in obsessive-compulsive disorder",so:"Nat Neurosci. 2013;16:386-7"},
+{k:"figee2014",a:"Figee M, de Koning P, Klaassen S, et al.",ti:"Deep brain stimulation induces striatal dopamine release in obsessive-compulsive disorder",so:"Biol Psychiatry. 2014;75:647-52",doi:"10.1016/j.biopsych.2013.06.021"},
+{k:"widge2019",a:"Widge AS, Zorowitz S, Basu I, et al.",ti:"Deep brain stimulation of the internal capsule enhances human cognitive control and prefrontal cortex function",so:"Nat Commun. 2019;10:1536"},
+{k:"mantione2014",a:"Mantione M, Nieman DH, Figee M, Denys D",ti:"Cognitive-behavioural therapy augments the effects of deep brain stimulation in obsessive-compulsive disorder",so:"Psychol Med. 2014;44:3515-22"},
+{k:"provenza2021",a:"Provenza NR, Sheth SA, Dastin-van Rijn EM, et al.",ti:"Long-term ecological assessment of intracranial electrophysiology synchronized to behavioral markers in obsessive-compulsive disorder",so:"Nat Med. 2021;27:2154-64"},
+{k:"provenza2024",a:"Provenza NR, et al. (auteurs cités de mémoire)",ti:"Disruption of neural periodicity predicts clinical response after deep brain stimulation for obsessive-compulsive disorder",so:"Nat Med. 2024"},
+{k:"koss2005",a:"Koss AM, Alterman RL, Tagliati M, Shils JL",ti:"Calculating total electrical energy delivered by deep brain stimulation systems",so:"Ann Neurol. 2005;58:168"},
+{k:"patrick2024",a:"Patrick EE, Fleeting CR, Patel DR, et al.",ti:"Modeling the volume of tissue activated in deep brain stimulation and its clinical influence: a review",so:"Front Hum Neurosci. 2024;18:1333183"},
+{k:"vanwesten2021",a:"van Westen M, Rietveld E, Bergfeld IO, et al.",ti:"Optimizing deep brain stimulation parameters in obsessive-compulsive disorder",so:"Neuromodulation. 2021;24:307-15"},
+{k:"nuttin1999",a:"Nuttin B, Cosyns P, Demeulemeester H, Gybels J, Meyerson B",ti:"Electrical stimulation in anterior limbs of internal capsules in patients with obsessive-compulsive disorder",so:"Lancet. 1999;354:1526"},
+{k:"nuttin2003",a:"Nuttin BJ, Gabriëls LA, Cosyns PR, et al.",ti:"Long-term electrical capsular stimulation in patients with obsessive-compulsive disorder",so:"Neurosurgery. 2003;52:1263-72"},
+{k:"greenberg2006",a:"Greenberg BD, Malone DA, Friehs GM, et al.",ti:"Three-year outcomes in deep brain stimulation for highly resistant obsessive-compulsive disorder",so:"Neuropsychopharmacology. 2006;31:2384-93",doi:"10.1038/sj.npp.1301165"},
+{k:"greenberg2010",a:"Greenberg BD, Gabriels LA, Malone DA Jr, et al.",ti:"Deep brain stimulation of the ventral internal capsule/ventral striatum for obsessive-compulsive disorder: worldwide experience",so:"Mol Psychiatry. 2010;15:64-79"},
+{k:"goodman2010",a:"Goodman WK, Foote KD, Greenberg BD, et al.",ti:"Deep brain stimulation for intractable obsessive compulsive disorder: pilot study using a blinded, staggered-onset design",so:"Biol Psychiatry. 2010;67:535-42"},
+{k:"mallet2002",a:"Mallet L, Mesnage V, Houeto JL, et al.",ti:"Compulsions, Parkinson's disease, and stimulation",so:"Lancet. 2002;360:1302-4"},
+{k:"mallet2008",a:"Mallet L, Polosan M, Jaafari N, et al.",ti:"Subthalamic nucleus stimulation in severe obsessive-compulsive disorder",so:"N Engl J Med. 2008;359:2121-34",doi:"10.1056/NEJMoa0708514"},
+{k:"mallet2019",a:"Mallet L, Tezenas du Montcel S, Clair AH, et al.",ti:"Long-term effects of subthalamic stimulation in obsessive-compulsive disorder: follow-up of a randomized controlled trial",so:"Brain Stimul. 2019;12:1080-2",doi:"10.1016/j.brs.2019.04.004"},
+{k:"chabardes2020",a:"Chabardès S, Krack P, Piallat B, et al.",ti:"Deep brain stimulation of the subthalamic nucleus in obsessive-compulsives disorders: long-term follow-up of an open, prospective, observational cohort",so:"J Neurol Neurosurg Psychiatry. 2020;91:1349-56",doi:"10.1136/jnnp-2020-323421"},
+{k:"denys2010",a:"Denys D, Mantione M, Figee M, et al.",ti:"Deep brain stimulation of the nucleus accumbens for treatment-refractory obsessive-compulsive disorder",so:"Arch Gen Psychiatry. 2010;67:1061-8",doi:"10.1001/archgenpsychiatry.2010.122"},
+{k:"denys2020",a:"Denys D, Graat I, Mocking R, et al.",ti:"Efficacy of deep brain stimulation of the ventral anterior limb of the internal capsule for refractory obsessive-compulsive disorder: a clinical cohort of 70 patients",so:"Am J Psychiatry. 2020;177:265-71",doi:"10.1176/appi.ajp.2019.19060656"},
+{k:"graat2021",a:"Graat I, Mocking R, Figee M, et al.",ti:"Long-term outcome of deep brain stimulation of the ventral part of the anterior limb of the internal capsule in a cohort of 50 patients with treatment-refractory obsessive-compulsive disorder",so:"Biol Psychiatry. 2021;90:714-20",doi:"10.1016/j.biopsych.2020.08.018"},
+{k:"graat2021jcp",a:"Graat I, Mocking RJT, de Koning P, et al.",ti:"Predicting response to vALIC deep brain stimulation for refractory obsessive-compulsive disorder",so:"J Clin Psychiatry. 2021;82(6):20m13754",doi:"10.4088/JCP.20m13754"},
+{k:"huff2010",a:"Huff W, Lenartz D, Schormann M, et al.",ti:"Unilateral deep brain stimulation of the nucleus accumbens in patients with treatment-resistant obsessive-compulsive disorder: outcomes after one year",so:"Clin Neurol Neurosurg. 2010;112:137-43",doi:"10.1016/j.clineuro.2009.11.006"},
+{k:"luyten2016",a:"Luyten L, Hendrickx S, Raymaekers S, Gabriëls L, Nuttin B",ti:"Electrical stimulation in the bed nucleus of the stria terminalis alleviates severe obsessive-compulsive disorder",so:"Mol Psychiatry. 2016;21:1272-80",doi:"10.1038/mp.2015.124"},
+{k:"mosley2021",a:"Mosley PE, Windels F, Morris J, et al.",ti:"A randomised, double-blind, sham-controlled trial of deep brain stimulation of the bed nucleus of the stria terminalis for treatment-resistant obsessive-compulsive disorder",so:"Transl Psychiatry. 2021;11:190",doi:"10.1038/s41398-021-01307-9"},
+{k:"naesstrom2021",a:"Naesström M, Hariz M, Strömsten L, Bodlund O, Blomstedt P",ti:"Deep brain stimulation in the bed nucleus of stria terminalis in obsessive-compulsive disorder: 1-year follow-up",so:"World Neurosurg. 2021;149:e794-e802",doi:"10.1016/j.wneu.2021.01.097"},
+{k:"tyagi2019",a:"Tyagi H, Apergis-Schoute AM, Akram H, et al.",ti:"A randomized trial directly comparing ventral capsule and anteromedial subthalamic nucleus stimulation in obsessive-compulsive disorder: clinical and imaging evidence for dissociable effects",so:"Biol Psychiatry. 2019;85:726-34",doi:"10.1016/j.biopsych.2019.01.017"},
+{k:"welter2021",a:"Welter ML, Alves Dos Santos JF, Clair AH, et al.",ti:"Deep brain stimulation of the subthalamic, accumbens, or caudate nuclei for patients with severe obsessive-compulsive disorder: a randomized crossover controlled study",so:"Biol Psychiatry. 2021;90:e45-e47"},
+{k:"barcia2019",a:"Barcia JA, Avecillas-Chasin JM, Nombela C, et al.",ti:"Personalized striatal targets for deep brain stimulation in obsessive-compulsive disorder",so:"Brain Stimul. 2019;12:724-34",doi:"10.1016/j.brs.2018.12.226"},
+{k:"jimenezponce2009",a:"Jiménez-Ponce F, Velasco-Campos F, Castro-Farfán G, et al.",ti:"Preliminary study in patients with obsessive-compulsive disorder treated with electrical stimulation in the inferior thalamic peduncle",so:"Neurosurgery. 2009;65(6 Suppl):203-9"},
+{k:"lee2019",a:"Lee DJ, et al.",ti:"Inferior thalamic peduncle deep brain stimulation for treatment-refractory obsessive-compulsive disorder: a phase 1 pilot trial",so:"Brain Stimul. 2019;12:344-52",doi:"10.1016/j.brs.2018.11.012"},
+{k:"coenen2017",a:"Coenen VA, Schlaepfer TE, Goll P, et al.",ti:"The medial forebrain bundle as a target for deep brain stimulation for obsessive-compulsive disorder",so:"CNS Spectr. 2017;22:282-9"},
+{k:"winter2021",a:"Winter L, Saryyeva A, Schwabe K, et al.",ti:"Long-term deep brain stimulation in treatment-resistant obsessive-compulsive disorder: outcome and quality of life at four to eight years follow-up",so:"Neuromodulation. 2021;24:324-30",doi:"10.1111/ner.13232"},
+{k:"alonso2015",a:"Alonso P, Cuadras D, Gabriëls L, et al.",ti:"Deep brain stimulation for obsessive-compulsive disorder: a meta-analysis of treatment outcome and predictors of response",so:"PLoS One. 2015;10:e0133591",doi:"10.1371/journal.pone.0133591"},
+{k:"gadot2022",a:"Gadot R, Najera R, Hirani S, et al.",ti:"Efficacy of deep brain stimulation for treatment-resistant obsessive-compulsive disorder: systematic review and meta-analysis",so:"J Neurol Neurosurg Psychiatry. 2022;93:1166-73",doi:"10.1136/jnnp-2021-328738"},
+{k:"cohen2025",a:"Cohen SE, Niemeijer MJ, Zantvoord JB, van Wingen GA, Mocking RJT, Denys D",ti:"Deep brain stimulation for obsessive-compulsive-disorder: a systematic review and meta-analysis of individual participant outcome data from sham-controlled trials",so:"Mol Psychiatry. 2025;30:4937-47",doi:"10.1038/s41380-025-03092-z"},
+{k:"thava2026",a:"Thavarajasingam SG, et al.",ti:"Predictors of deep brain stimulation response in patients with obsessive compulsive disorder: a systematic review and meta-analysis",so:"Sci Rep. 2026;16:17357",doi:"10.1038/s41598-026-54929-8"},
+{k:"hamani2014",a:"Hamani C, Pilitsis J, Rughani AI, et al.",ti:"Deep brain stimulation for obsessive-compulsive disorder: systematic review and evidence-based guideline sponsored by the American Society for Stereotactic and Functional Neurosurgery and the Congress of Neurological Surgeons",so:"Neurosurgery. 2014;75:327-33"},
+{k:"staudt2021",a:"Staudt MD, Pouratian N, Miller JP, et al.",ti:"Congress of Neurological Surgeons systematic review and evidence-based guidelines for deep brain stimulations for obsessive-compulsive disorder: update of the 2014 guidelines",so:"Neurosurgery. 2021;88:710-2",doi:"10.1093/neuros/nyaa596"},
+{k:"nuttin2014",a:"Nuttin B, Wu H, Mayberg H, et al.",ti:"Consensus on guidelines for stereotactic neurosurgery for psychiatric disorders",so:"J Neurol Neurosurg Psychiatry. 2014;85:1003-8"},
+{k:"nice2021",a:"National Institute for Health and Care Excellence",ti:"Deep brain stimulation for chronic, severe, treatment-resistant obsessive-compulsive disorder in adults (interventional procedures guidance)",so:"NICE, 2021",nopub:true},
+{k:"wu2021",a:"Wu H, Hariz M, Visser-Vandewalle V, et al.",ti:"Deep brain stimulation for refractory obsessive-compulsive disorder (OCD): emerging or established therapy?",so:"Mol Psychiatry. 2021;26:60-5"},
+{k:"vv2022",a:"Visser-Vandewalle V, Andrade P, Mosley PE, et al.",ti:"Deep brain stimulation for obsessive-compulsive disorder: a crisis of access",so:"Nat Med. 2022;28:1529-32",doi:"10.1038/s41591-022-01879-z"},
+{k:"mocking2021",a:"Mocking RJT, Graat I, Denys D",ti:"Why has deep brain stimulation had so little impact in psychiatry?",so:"Front Neurol. 2021;12:757142"},
+{k:"bouwens2022",a:"Bouwens van der Vlis TAM, van de Veerdonk MMGH, Ackermans L, et al.",ti:"Surgical and hardware-related adverse events of deep brain stimulation: a ten-year single-center experience",so:"Neuromodulation. 2022;25:296-304"},
+{k:"ooms2014",a:"Ooms P, Blankers M, Figee M, et al.",ti:"Rebound of affective symptoms following acute cessation of deep brain stimulation in obsessive-compulsive disorder",so:"Brain Stimul. 2014;7:727-31"},
+{k:"pugh2019",a:"Pugh J",ti:"No going back? Reversibility and why it matters for deep brain stimulation",so:"J Med Ethics. 2019;45:225-30"},
+{k:"pepper2015",a:"Pepper J, Hariz M, Zrinzo L",ti:"Deep brain stimulation versus anterior capsulotomy for obsessive-compulsive disorder: a review of the literature",so:"J Neurosurg. 2015;122:1028-37"},
+{k:"lai2020",a:"Lai Y, Wang T, Zhang C, et al.",ti:"Effectiveness and safety of neuroablation for severe and treatment-resistant obsessive-compulsive disorder: a systematic review and meta-analysis",so:"J Psychiatry Neurosci. 2020;45:356-69"},
+{k:"lopes2014",a:"Lopes AC, Greenberg BD, Canteras MM, et al.",ti:"Gamma ventral capsulotomy for obsessive-compulsive disorder: a randomized clinical trial",so:"JAMA Psychiatry. 2014;71:1066-76"},
+{k:"ruck2008",a:"Rück C, Karlsson A, Steele JD, et al.",ti:"Capsulotomy for obsessive-compulsive disorder: long-term follow-up of 25 patients",so:"Arch Gen Psychiatry. 2008;65:914-21"},
+{k:"jung2015",a:"Jung HH, Kim SJ, Roh D, et al.",ti:"Bilateral thermal capsulotomy with MR-guided focused ultrasound for patients with treatment-refractory obsessive-compulsive disorder: a proof-of-concept study",so:"Mol Psychiatry. 2015;20:1205-11"},
+{k:"carmi2019",a:"Carmi L, Tendler A, Bystritsky A, et al.",ti:"Efficacy and safety of deep transcranial magnetic stimulation for obsessive-compulsive disorder: a prospective multicenter randomized double-blind placebo-controlled trial",so:"Am J Psychiatry. 2019;176:931-8"},
+{k:"nct04806516",a:"Baylor College of Medicine",ti:"Phase II adaptive deep brain stimulation for obsessive-compulsive disorder (NCT04806516)",so:"ClinicalTrials.gov, fiche vérifiée en août 2025",nopub:true,url:"https://clinicaltrials.gov/study/NCT04806516"},
+{k:"nct06660225",a:"University of Texas Southwestern Medical Center",ti:"Towards closed loop deep brain stimulation for treatment of refractory obsessive-compulsive disorder (NCT06660225)",so:"ClinicalTrials.gov, fiche mise à jour en avril 2026",nopub:true,url:"https://clinicaltrials.gov/study/NCT06660225"}
+];
+const RIDX={};REFS.forEach((r,i)=>RIDX[r.k]=i+1);
+const refHTML=r=>{const end=x=>/[.?!]$/.test(x)?x:x+".";let s=`${end(r.a)} ${end(r.ti)} <i>${r.so}</i>.`;const l=[];if(!r.nopub)l.push(`<a class="lnk" href="https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(r.ti)}" target="_blank" rel="noopener">PubMed</a>`);if(r.doi)l.push(`<a class="lnk" href="https://doi.org/${r.doi}" target="_blank" rel="noopener">DOI</a>`);if(r.url)l.push(`<a class="lnk" href="${r.url}" target="_blank" rel="noopener">Fiche</a>`);return s+" "+l.join(" ");};
+function processCites(root){
+  $$("cite[data-r]",root).forEach(c=>{
+    const keys=c.dataset.r.split(",").map(s=>s.trim()).filter(k=>RIDX[k]);
+    const sup=document.createElement("sup");sup.className="cite";
+    sup.innerHTML="["+keys.map(k=>`<button type="button" class="refbtn" data-k="${k}" aria-label="Référence ${RIDX[k]}">${RIDX[k]}</button>`).join(", ")+"]";
+    c.replaceWith(sup);
+  });
+}
+const reflist=$("#reflist");
+REFS.forEach(r=>{const li=document.createElement("li");li.id="ref-"+r.k;li.innerHTML=refHTML(r);reflist.appendChild(li);});
+processCites(document);
+const pop=$("#refpop"),popBody=$("#refpop-body");
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".refbtn");
+  if(b){e.preventDefault();const r=REFS[RIDX[b.dataset.k]-1];popBody.innerHTML=`<p><b>[${RIDX[r.k]}]</b> ${refHTML(r)}</p><p><a href="#c12" data-goto="${r.k}">Voir dans la liste complète</a></p>`;pop.hidden=false;return;}
+  const g=e.target.closest("[data-goto]");
+  if(g){pop.hidden=true;setTimeout(()=>{const li=$("#ref-"+g.dataset.goto);if(li){li.scrollIntoView({block:"center"});li.classList.add("flash");setTimeout(()=>li.classList.remove("flash"),1800);}},60);return;}
+  if(!pop.hidden&&!e.target.closest("#refpop"))pop.hidden=true;
+});
+$("#refpop .x").addEventListener("click",()=>pop.hidden=true);
+
+/* ---------------- Router, progress, drawer, theme ---------------- */
+const chaps=$$(".chap"), tocList=$("#toc-list");
+const visited=new Set(store.get("scp-toc-visited",[]));
+chaps.forEach((c,i)=>{
+  const li=document.createElement("li");
+  li.innerHTML=`<a href="#${c.id}"><span class="n">${i}</span><span class="t">${c.dataset.title}</span><span class="seen" aria-hidden="true"></span></a>`;
+  tocList.appendChild(li);
+  const nav=document.createElement("nav");nav.className="pager";nav.setAttribute("aria-label","Navigation entre chapitres");
+  nav.innerHTML=(i>0?`<a class="prev" href="#${chaps[i-1].id}"><small>Précédent</small>${chaps[i-1].dataset.title}</a>`:"")+(i<chaps.length-1?`<a class="next" href="#${chaps[i+1].id}"><small>Suivant</small>${chaps[i+1].dataset.title}</a>`:"");
+  c.appendChild(nav);
+});
+function updateProgress(){
+  $$("#toc-list a").forEach(a=>a.classList.toggle("visited",visited.has(a.getAttribute("href").slice(1))));
+  const n=visited.size,t=chaps.length;
+  $("#prog-label").textContent=`${n} chapitre${n>1?"s":""} sur ${t} parcouru${n>1?"s":""}`;
+  $("#prog-bar").style.width=(n/t*100)+"%";
+}
+function show(id,scroll){
+  let idx=chaps.findIndex(c=>c.id===id);if(idx<0)idx=0;
+  chaps.forEach((c,i)=>c.hidden=i!==idx);
+  $$("#toc-list a").forEach((a,i)=>{if(i===idx)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
+  $("#tb-title").textContent=chaps[idx].dataset.title;
+  document.title=chaps[idx].dataset.title+" · SCP et TOC";
+  visited.add(chaps[idx].id);store.set("scp-toc-visited",[...visited]);updateProgress();
+  closeNav();
+  if(scroll!==false)window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h.startsWith("c"))show(h);});
+function openNav(){document.body.classList.add("nav-open");$("#scrim").hidden=false;$("#nav-open").setAttribute("aria-expanded","true");}
+function closeNav(){document.body.classList.remove("nav-open");$("#scrim").hidden=true;$("#nav-open").setAttribute("aria-expanded","false");}
+$("#nav-open").addEventListener("click",openNav);
+$("#scrim").addEventListener("click",closeNav);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeNav();pop.hidden=true;}});
+const themes=["auto","light","dark"],tLab={auto:"automatique",light:"clair",dark:"sombre"};
+let theme=store.get("scp-toc-theme","auto");
+function applyTheme(){if(theme==="auto")document.documentElement.removeAttribute("data-theme");else document.documentElement.dataset.theme=theme;$("#theme-btn").textContent="Thème : "+tLab[theme];}
+$("#theme-btn").addEventListener("click",()=>{theme=themes[(themes.indexOf(theme)+1)%3];store.set("scp-toc-theme",theme);applyTheme();});
+applyTheme();
+
+/* ---------------- Hero trace ---------------- */
+(function(){let d="M40,446";for(let x=60;x<596;x+=28){d+=` L${x},446 L${x},462 L${x+3},462 L${x+3},446 L${x+4},441 L${x+14},442 L${x+20},446`;}d+=" L600,446";$("#hero-trace").setAttribute("d",d);})();
+
+/* ---------------- CSTC ---------------- */
+const MODE_INFO={
+all:`<h4>Vue d'ensemble</h4><p>Chaque boucle part d'une région du cortex frontal, passe par le striatum et les noyaux de sortie des ganglions de la base (GPi/SNr), puis revient au même cortex via le thalamus. La sortie GPi/SNr est inhibitrice en permanence : elle freine le thalamus. Touchez une structure pour lire son rôle.</p>`,
+direct:`<h4>Voie directe : l'accélérateur</h4><p>Le cortex excite le striatum, qui inhibe GPi/SNr ; celui-ci cesse de freiner le thalamus, qui excite davantage le cortex. Effet net : faciliter le comportement en cours. Dans le modèle classique du TOC, cette voie domine dans la boucle orbitofrontale.</p>`,
+indirect:`<h4>Voie indirecte : le frein</h4><p>Le striatum inhibe le pallidum externe (GPe), qui relâche son propre frein sur le noyau sous-thalamique ; le NST excite alors GPi/SNr, qui inhibe davantage le thalamus. Effet net : freiner ou interrompre un comportement.</p>`,
+hyperdirect:`<h4>Voie hyperdirecte : le frein d'urgence</h4><p>Le cortex frontal médian excite directement le NST, en court-circuitant le striatum : un signal d'arrêt rapide. C'est le long de ces fibres, qui traversent la capsule interne, que se situe la cible connectomique unifiée proposée en 2020 <cite data-r="li2020"></cite>.</p>`,
+toc:`<h4>Hypothèse du TOC</h4><p>Hyperactivité orbitofrontale, cingulaire, caudée et thalamique, et déséquilibre en faveur de la voie directe : la boucle s'auto-entretient et le signal « quelque chose ne va pas » ne s'éteint pas <cite data-r="saxena2000"></cite>. Modèle utile mais incomplet : il n'explique ni les difficultés d'extinction de la peur ni le biais vers l'habitude <cite data-r="milad2012,gillan2011"></cite>.</p>`,
+targets:`<h4>Les cibles sur le circuit</h4><p>Les principales cibles sont des carrefours de ce réseau : fibres du bras antérieur de la capsule interne, striatum ventral et accumbens, NST antéro-médian, BNST (amygdale étendue) et pédoncule thalamique inférieur, qui relie thalamus et cortex orbitofrontal. Leur emplacement anatomique est détaillé au <a href="#c4">chapitre 4</a>.</p>`
+};
+const NODE_INFO={
+ofc:`<h4>Cortex orbitofrontal</h4><p>Évalue la valeur des options et les conséquences attendues, et permet d'ajuster le comportement quand elles changent. Hyperactif au repos dans le TOC et davantage lors de la provocation des symptômes <cite data-r="saxena2000"></cite>. Chez la souris, stimuler ses projections vers le striatum peut créer ou supprimer des compulsions selon la voie engagée <cite data-r="ahmari2013,burguiere2013"></cite>.</p>`,
+acc:`<h4>Cingulaire antérieur et préfrontal dorsomédian</h4><p>Détection du conflit et de l'erreur, signal d'alarme quand un résultat ne correspond pas à l'attente. Point de départ des fibres de la voie hyperdirecte vers le NST, et du faisceau associé aux stimulations efficaces <cite data-r="li2020"></cite>.</p>`,
+dlpfc:`<h4>Préfrontal dorsolatéral</h4><p>Contrôle exécutif, planification, inhibition volontaire. Il appartient surtout à la boucle cognitive dorsale et c'est une cible des techniques non invasives comme la stimulation magnétique. Les stimulations capsulaires améliorent le contrôle cognitif et l'activité thêta préfrontale <cite data-r="widge2019"></cite>.</p>`,
+str:`<h4>Striatum</h4><p>Porte d'entrée des ganglions de la base : caudé pour les boucles associatives, striatum ventral et noyau accumbens pour la motivation, la récompense et l'anxiété. La stimulation de l'accumbens réduit l'hyperconnectivité avec le cortex préfrontal <cite data-r="figee2013"></cite> et augmente la libération de dopamine striatale <cite data-r="figee2014"></cite>.</p>`,
+gpe:`<h4>Pallidum externe (GPe)</h4><p>Relais de la voie indirecte : inhibé par le striatum, il inhibe lui-même le NST. Ce n'est pas une cible dans le TOC.</p>`,
+stn:`<h4>Noyau sous-thalamique</h4><p>Nœud de la voie indirecte et point d'arrivée de la voie hyperdirecte. Sa partie antéro-médiane, associative et limbique, est la cible de l'essai français contre stimulation fictive <cite data-r="mallet2008"></cite>. Sa partie motrice est la cible classique dans la maladie de Parkinson, d'où un risque d'effets moteurs si le courant diffuse.</p>`,
+gpi:`<h4>GPi et substance noire réticulée</h4><p>Sortie des ganglions de la base, inhibitrice en permanence vers le thalamus. La voie directe lève ce frein ; les voies indirecte et hyperdirecte le renforcent.</p>`,
+thal:`<h4>Thalamus</h4><p>Les noyaux médiodorsal et ventral antérieur renvoient l'information vers le cortex préfrontal et referment la boucle. Le pédoncule thalamique inférieur, qui le relie au cortex orbitofrontal, a été utilisé comme cible <cite data-r="jimenezponce2009"></cite>.</p>`,
+amy:`<h4>Amygdale et BNST</h4><p>Circuit de la peur et de l'anxiété, en lien avec le striatum ventral et le préfrontal ventromédian, impliqués dans l'extinction de la peur <cite data-r="milad2012"></cite>. Le BNST, partie de l'amygdale étendue, sous-tend plutôt l'anxiété soutenue ; c'est une cible de stimulation <cite data-r="luyten2016"></cite>.</p>`
+};
+const cstc=$("#cstc"),cInfo=$("#cstc-info");
+function setInfo(box,html){box.innerHTML=html;processCites(box);}
+function cstcMode(m){
+  $$("#cstc-modes .chip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===m));
+  $$("#edges .edge").forEach(p=>{p.classList.remove("on","dim","hot");const ms=(p.dataset.m||"").split(" ");
+    if(m==="all"||m==="targets")return;
+    if(ms.includes(m)){p.classList.add("on");if(m==="toc")p.classList.add("hot");}else p.classList.add("dim");});
+  $$("#nodes .dg-node").forEach(n=>{n.classList.remove("sel");n.classList.toggle("hot",m==="toc"&&["ofc","acc","str","thal"].includes(n.dataset.node));});
+  cstc.classList.toggle("show-tgt",m==="targets");
+  setInfo(cInfo,MODE_INFO[m]);
+}
+$$("#cstc-modes .chip").forEach(b=>b.addEventListener("click",()=>cstcMode(b.dataset.mode)));
+$$("#nodes .dg-node").forEach(n=>{
+  const act=()=>{$$("#nodes .dg-node").forEach(x=>x.classList.remove("sel"));n.classList.add("sel");setInfo(cInfo,NODE_INFO[n.dataset.node]);};
+  n.addEventListener("click",act);n.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}});
+});
+cstcMode("all");
+
+/* ---------------- Target explorer ---------------- */
+const C2=`<span class="conf c2">confiance moyenne</span>`,C1=`<span class="conf c1">confiance faible</span>`;
+const TARGETS=[
+{id:"vcvs",chip:"VC/VS",tip:[288,278],entry:[236,48],hl:["s-alic","s-nac"],lab:[300,262,"start"],fr:24,html:`<h4>Capsule ventrale et striatum ventral (VC/VS)</h4><p>Héritière de la capsulotomie antérieure : on stimule la partie ventrale du bras antérieur de la capsule interne et le striatum ventral adjacent, là où passent les fibres qui relient le cortex préfrontal au thalamus et au tronc cérébral. La première série visait la capsule elle-même, avec des amplitudes très élevées <cite data-r="nuttin1999,nuttin2003"></cite> ; la cible s'est ensuite déplacée vers l'arrière et vers le bas, à la jonction capsule-striatum.</p><dl><dt>Données</dt><dd>Suivi à 3 ans d'une dizaine de patients <cite data-r="greenberg2006"></cite> ; expérience de 4 centres portant sur 26 patients, avec environ six répondeurs sur dix au dernier suivi <cite data-r="greenberg2010"></cite> ; étude pilote en aveugle à démarrage décalé, 6 patients <cite data-r="goodman2010"></cite>. ${C2}</dd><dt>Réglages</dt><dd>Élevés : ≈ 3 à 8 V, 90 à 210 µs, 100 à 150 Hz, d'où une forte consommation électrique.</dd><dt>À surveiller</dt><dd>Hypomanie, anxiété, sensations de goût ou d'odeur, sudation, insomnie.</dd><dt>Recommandation</dt><dd>Pas de ligne propre en 2021 ; l'accumbens voisin est en niveau II <cite data-r="staudt2021"></cite>.</dd></dl>`},
+{id:"nac",chip:"vALIC / NAc",tip:[252,284],entry:[200,56],hl:["s-nac","s-alic"],lab:[206,262,"end"],fr:24,html:`<h4>Bras antérieur ventral et noyau accumbens (vALIC / NAc)</h4><p>Approche d'Amsterdam : l'électrode suit la partie ventrale du bras antérieur, avec le contact le plus profond dans l'accumbens. Les contacts les plus efficaces sont souvent les plus hauts, dans la capsule : on stimule donc surtout des fibres.</p><dl><dt>Données</dt><dd>16 patients avec phase croisée contre stimulation fictive <cite data-r="denys2010"></cite>. Cohorte de 70 patients : −13,5 points (−40 %) à 12 mois, 52 % de répondeurs, 17 % de répondeurs partiels, 31 % de non-répondeurs ; anxiété −55 %, dépression −54 % <cite data-r="denys2020"></cite>. Suivi au long cours de 50 patients <cite data-r="graat2021"></cite>. En stimulation de l'accumbens droit seul : 1 réponse complète, 4 partielles et 5 absences de réponse sur 10 patients <cite data-r="huff2010"></cite>, un argument pour la stimulation bilatérale.</dd><dt>Réglages</dt><dd>≈ 3 à 6 V, 90 à 150 µs, 130 à 180 Hz ${C2}</dd><dt>À surveiller</dt><dd>Hypomanie transitoire, agitation, impulsivité, troubles du sommeil <cite data-r="denys2020"></cite>.</dd><dt>Recommandation</dt><dd>Niveau II pour l'accumbens bilatéral <cite data-r="staudt2021"></cite>.</dd></dl>`},
+{id:"stn",chip:"amSTN",tip:[438,318],entry:[330,46],hl:["s-stn"],lab:[464,318,"start"],fr:13,html:`<h4>Noyau sous-thalamique antéro-médian (amSTN)</h4><p>Petite portion associative et limbique d'un noyau déjà ciblé, dans sa partie motrice, pour la maladie de Parkinson ; carrefour des voies indirecte et hyperdirecte. L'idée vient notamment de patients parkinsoniens stimulés dont les compulsions s'amélioraient <cite data-r="mallet2002"></cite>.</p><dl><dt>Données</dt><dd>Essai français STOC : 16 patients, deux périodes de 3 mois (active et fictive) en double aveugle séparées d'un mois ; Y-BOCS 30 à l'inclusion, 28 après la période fictive, 19 après la période active <cite data-r="mallet2008"></cite>. Suivi prolongé jusqu'à 46 mois <cite data-r="mallet2019"></cite> et cohorte ouverte grenobloise au long cours <cite data-r="chabardes2020"></cite>. Face à la capsule ventrale chez 6 patients : efficacité comparable, avantage pour la flexibilité cognitive <cite data-r="tyagi2019"></cite>.</dd><dt>Réglages</dt><dd>Faibles : ≈ 1 à 3 V ou mA, 60 à 90 µs, 130 Hz ${C2}. La cible est petite : un champ trop large diffuse vers le territoire moteur.</dd><dt>À surveiller</dt><dd>Hypomanie, impulsivité, effets moteurs en cas de diffusion ; événements graves dans l'essai initial, dont une hémorragie et deux infections <cite data-r="mallet2008"></cite>.</dd><dt>Recommandation</dt><dd>Niveau I (NST bilatéral contre meilleur traitement médical), sur la base essentiellement d'un seul essai <cite data-r="staudt2021"></cite>.</dd></dl>`},
+{id:"bnst",chip:"BNST",tip:[347,289],entry:[286,44],hl:["s-bnst","s-ac"],lab:[362,302,"start"],fr:16,html:`<h4>Noyau du lit de la strie terminale (BNST)</h4><p>Partie de l'amygdale étendue, impliquée dans l'anxiété soutenue et anticipatoire plus que dans la peur immédiate ; située juste en arrière de la commissure antérieure. Dans la série de Louvain, les contacts les plus efficaces se trouvaient souvent dans cette région, en dessous et en arrière de la cible capsulaire initiale ${C2}.</p><dl><dt>Données</dt><dd>24 patients, avec une phase croisée en aveugle <cite data-r="luyten2016"></cite> ; essai randomisé contre stimulation fictive de 9 patients, en faveur de la stimulation active <cite data-r="mosley2021"></cite> ; suivi à un an d'une série suédoise <cite data-r="naesstrom2021"></cite>. ${C2} sur le détail des taux de réponse.</dd><dt>Réglages</dt><dd>≈ 3 à 6 V, 90 à 210 µs, 130 Hz ${C1}</dd><dt>À surveiller</dt><dd>Hypomanie, anxiété transitoire ; proximité de structures vasculaires et hypothalamiques.</dd><dt>Recommandation</dt><dd>Niveau II <cite data-r="staudt2021"></cite>.</dd></dl>`},
+{id:"itp",chip:"ITP",tip:[366,293],entry:[300,44],hl:["s-itp","s-thal"],lab:[372,318,"start"],fr:14,html:`<h4>Pédoncule thalamique inférieur (ITP)</h4><p>Faisceau qui relie le thalamus au cortex orbitofrontal : on vise directement une connexion de la boucle orbitofrontale plutôt qu'un noyau.</p><dl><dt>Données</dt><dd>Série mexicaine de 5 patients <cite data-r="jimenezponce2009"></cite> ; essai pilote de phase 1 <cite data-r="lee2019"></cite>.</dd><dt>Réglages</dt><dd>Très variables ${C1}</dd><dt>Recommandation</dt><dd>Données insuffisantes.</dd></dl>`},
+{id:"mfb",chip:"slMFB",tip:[452,342],entry:[352,44],hl:["s-mfb","s-vta"],lab:[468,352,"start"],fr:14,html:`<h4>Faisceau médian du télencéphale, branche supérolatérale (slMFB)</h4><p>Fibres issues de l'aire tegmentale ventrale, en partie dopaminergiques, qui gagnent le cortex préfrontal en passant par la capsule interne. Cible venue de la dépression résistante, testée dans le TOC par la même équipe.</p><dl><dt>Données</dt><dd>Cas isolés <cite data-r="coenen2017"></cite>.</dd><dt>Réglages</dt><dd>Rapportés dans des cas isolés ${C1}</dd><dt>Recommandation</dt><dd>Données insuffisantes.</dd></dl>`}
+];
+const tgBtns=$("#tg-btns"),leadL=$("#lead-layer"),labL=$("#lab-layer"),tgCard=$("#tg-card");
+TARGETS.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=t.chip;b.dataset.t=t.id;b.setAttribute("aria-pressed","false");b.addEventListener("click",()=>selTarget(t.id));tgBtns.appendChild(b);});
+function selTarget(id){
+  const t=TARGETS.find(x=>x.id===id);
+  $$("#tg-btns .chip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===id));
+  $$("#anat .st, #anat .fib").forEach(s=>s.classList.remove("hl"));
+  t.hl.forEach(h=>{const s=$("#"+h);if(s)s.classList.add("hl");});
+  leadL.innerHTML="";labL.innerHTML="";
+  const [ex,ey]=t.entry,[tx,ty]=t.tip,dx=tx-ex,dy=ty-ey,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+  el("line",{x1:ex,y1:ey,x2:tx,y2:ty,stroke:"#8E9AA2","stroke-width":5,"stroke-linecap":"round"},leadL);
+  const cs=[];for(let i=0;i<4;i++){const d=5+i*11,cx=tx-ux*d,cy=ty-uy*d;cs.push([cx,cy]);el("line",{x1:cx-ux*4,y1:cy-uy*4,x2:cx+ux*4,y2:cy+uy*4,stroke:"#EEF2F4","stroke-width":7},leadL);}
+  el("circle",{class:"lead-field",cx:cs[1][0],cy:cs[1][1],r:t.fr,fill:"url(#glow2)"},leadL);
+  const tx2=el("text",{x:t.lab[0],y:t.lab[1],"text-anchor":t.lab[2],class:"lab-strong","font-size":16,fill:"#F2AA3F"},labL);tx2.textContent=t.chip;
+  setInfo(tgCard,t.html);
+}
+selTarget("nac");
+
+/* ---------------- Y-BOCS ---------------- */
+const YL=[["Temps occupé par les obsessions","Gêne dans la vie quotidienne","Détresse","Effort pour résister","Contrôle sur les obsessions"],["Temps passé aux compulsions","Gêne dans la vie quotidienne","Anxiété si l'on est empêché","Effort pour résister","Contrôle sur les compulsions"]];
+let yv=[Array(10).fill(0),Array(10).fill(0)],ytab=0,ytouched=[false,false];
+const YP={trial:[[4,3,4,3,3,4,3,4,3,3],[2,2,3,2,2,2,2,3,2,2]],case:[[4,3,4,3,3,4,4,4,3,3],[2,2,2,2,1,2,2,2,2,1]]};
+const band=t=>t<=7?"infraclinique":t<=15?"léger":t<=23?"modéré":t<=31?"sévère":"extrême";
+function ybRender(){
+  const box=$("#yb-items");box.innerHTML="";
+  [0,1].forEach(g=>{const col=document.createElement("div");col.className="yb-col";col.innerHTML=`<h4>${g?"Compulsions":"Obsessions"}</h4>`;
+    YL[g].forEach((lab,j)=>{const i=g*5+j,row=document.createElement("div");row.className="yb-item";
+      let seg=`<span>${lab}</span><span class="seg" role="radiogroup" aria-label="${lab}">`;
+      for(let v=0;v<=4;v++)seg+=`<label><input type="radio" name="yb${ytab}-${i}" value="${v}" ${yv[ytab][i]===v?"checked":""}><span>${v}</span></label>`;
+      row.innerHTML=seg+"</span>";col.appendChild(row);});
+    box.appendChild(col);});
+  $$("input",box).forEach(inp=>inp.addEventListener("change",()=>{const i=+inp.name.split("-")[1];yv[ytab][i]=+inp.value;ytouched[ytab]=true;ybCalc();}));
+}
+function ybCalc(){
+  const t0=yv[0].reduce((a,b)=>a+b,0),t1=yv[1].reduce((a,b)=>a+b,0);
+  $("#yb-t0").textContent=t0;$("#yb-t1").textContent=t1;
+  const sc=$("#yb-scale");
+  sc.innerHTML=[[0,7],[8,15],[16,23],[24,31],[32,40]].map((b,i)=>`<div class="band" style="left:${b[0]/40*100}%;width:${(b[1]-b[0]+(i<4?1:0))/40*100}%;background:rgba(242,170,63,${.08+i*.12})"><em>${["infra.","léger","modéré","sévère","extrême"][i]}</em></div>`).join("")+`<div class="mk" style="left:${t0/40*100}%" data-l="initial ${t0}"></div>`+(ytouched[1]?`<div class="mk" style="left:${t1/40*100}%;background:#F2AA3F" data-l="suivi ${t1}"></div>`:"");
+  const v=$("#yb-verdict");
+  if(t0===0){$("#yb-pct").textContent="·";v.textContent="Cotez l'évaluation initiale, ou chargez un exemple.";return;}
+  if(!ytouched[1]){$("#yb-pct").textContent="·";v.textContent=`Score initial ${t0} : TOC ${band(t0)}. Passez à l'onglet Suivi pour coter la réévaluation.`;return;}
+  const p=(t0-t1)/t0*100;$("#yb-pct").textContent=(p>=0?"−":"+")+fr(Math.abs(p))+" %";
+  let s;
+  if(p>=35){s=`Répondeur : baisse de ${fr(p)} %.`+(t1<=12?` Score ≤ 12 : zone de rémission, sous réserve de la CGI et d'une durée d'au moins une semaine.`:` Mais un score de ${t1} reste dans la zone « ${band(t1)} ».`);}
+  else if(p>=25)s=`Réponse partielle : baisse de ${fr(p)} %. Score au suivi dans la zone « ${band(t1)} ».`;
+  else if(p>=0)s=`Non-réponse : baisse de ${fr(p)} %.`;
+  else s=`Aggravation de ${fr(-p)} %.`;
+  v.textContent=s+" Le consensus exige aussi une CGI-I de 1 ou 2 pour parler de réponse.";
+}
+$$("[data-yb-tab]").forEach(b=>b.addEventListener("click",()=>{ytab=+b.dataset.ybTab;$$("[data-yb-tab]").forEach(x=>x.setAttribute("aria-pressed",x===b));ybRender();}));
+$$("[data-yb-preset]").forEach(b=>b.addEventListener("click",()=>{const p=b.dataset.ybPreset;if(p==="reset"){yv=[Array(10).fill(0),Array(10).fill(0)];ytouched=[false,false];}else{yv=[YP[p][0].slice(),YP[p][1].slice()];ytouched=[true,true];}ybRender();ybCalc();}));
+ybRender();ybCalc();
+
+/* ---------------- Evidence bars ---------------- */
+const EV={
+red:{rows:[
+ {l:"Mallet 2008, période fictive (3 mois, aveugle)",v:6.7,c:"#9AA8B2"},
+ {l:"Mallet 2008, période active (3 mois, aveugle)",v:36.7,c:"#4C88EA"},
+ {l:"Denys 2020, cohorte ouverte à 12 mois (n = 70)",v:40,c:"#D8E0E5"},
+ {l:"Thavarajasingam 2026, méta-analyse (n = 296)",v:40,c:"#D8E0E5"},
+ {l:"Alonso 2015, méta-analyse (n = 116)",v:45.1,c:"#D8E0E5"},
+ {l:"Gadot 2022, méta-analyse (34 études)",v:47,c:"#D8E0E5"},
+ {l:"Cohen 2025, écart actif contre fictif (9 essais, n = 91)*",v:15.5,c:"#F2AA3F"}],
+ note:`Bleu et gris : essai contrôlé en aveugle. Blanc : études ouvertes ou synthèses qui en sont surtout composées. Orange : effet propre de la stimulation contre fictif. Les pourcentages de Mallet 2008 sont calculés à partir des scores moyens publiés (30, 28 et 19). * 5,1 points rapportés à un score initial supposé de 33 : conversion de ma part, ordre de grandeur.`},
+resp:{rows:[
+ {l:"Huff 2010, accumbens droit seul (n = 10)",v:10,c:"#9AA8B2"},
+ {l:"Denys 2020, cohorte à 12 mois (n = 70)",v:52,c:"#D8E0E5"},
+ {l:"Alonso 2015, méta-analyse",v:60,c:"#D8E0E5"},
+ {l:"Gadot 2022, méta-analyse",v:66,c:"#D8E0E5"}],
+ note:`Réponse : baisse d'au moins 35 % du score. Ces taux viennent pour l'essentiel d'études ouvertes. La stimulation unilatérale fait nettement moins bien.`}
+};
+function evShow(m){
+  $$("#ev-modes .chip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.ev===m));
+  const box=$("#ev-bars");box.innerHTML=EV[m].rows.map(r=>`<div class="bar-row"><span class="bar-lab">${r.l}</span><span class="bar-track"><span class="bar-fill" style="width:0;background:${r.c}" data-w="${r.v}"></span></span><span class="bar-val">${fr(r.v)} %</span></div>`).join("");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>$$(".bar-fill",box).forEach(f=>f.style.width=f.dataset.w+"%")));
+  $("#ev-note").textContent=EV[m].note;
+}
+$$("#ev-modes .chip").forEach(b=>b.addEventListener("click",()=>evShow(b.dataset.ev)));
+evShow("red");
+[["#ic-sham",11],["#ic-act",37]].forEach(([s,n])=>{$(s).innerHTML=Array.from({length:100},(_,i)=>`<i class="${i<n?"on":""}"></i>`).join("");});
+
+/* ---------------- Eligibility ---------------- */
+function eligCalc(){
+  const inc=$$("#elig [data-inc]"),exc=$$("#elig [data-exc]");
+  const ni=inc.filter(x=>x.checked).length,ne=exc.filter(x=>x.checked).length,o=$("#elig-out");
+  if(ne>0){o.textContent=`${ne} critère${ne>1?"s":""} d'exclusion présent${ne>1?"s":""} : la stimulation n'est habituellement pas proposée en l'état. Certains critères peuvent évoluer (sevrage, stabilisation).`;return;}
+  if(ni===inc.length){o.textContent="Profil compatible avec les critères habituels des essais : une discussion en centre expert se justifierait. Cela ne dit rien de la décision finale, qui revient à l'équipe pluridisciplinaire et au patient.";return;}
+  const miss=inc.filter(x=>!x.checked).map(x=>x.parentElement.textContent.trim());
+  o.textContent=`Critères d'inclusion remplis : ${ni} sur ${inc.length}. `+(ni===0?"Cochez les critères qui s'appliquent.":`Il manque : ${miss.slice(0,3).join(" ; ")}${miss.length>3?" ; …":""}.`);
+}
+$$("#elig input").forEach(i=>i.addEventListener("change",eligCalc));eligCalc();
+
+/* ---------------- Simulator ---------------- */
+const SP={vcvs:{mode:"V",amp:4.5,pw:150,f:130,z:1000,lead:"3",c:1},stn:{mode:"V",amp:2.0,pw:60,f:130,z:1000,lead:"1.5",c:1},pd:{mode:"V",amp:2.5,pw:60,f:130,z:1000,lead:"1.5",c:1}};
+let sc=1;
+const sIn={mode:$("#s-mode"),amp:$("#s-amp"),pw:$("#s-pw"),f:$("#s-f"),z:$("#s-z"),lead:$("#s-lead")};
+const cBox=$("#s-contacts");
+["0 (distal)","1","2","3"].forEach((t,i)=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=t;b.dataset.c=i;b.addEventListener("click",()=>{sc=i;simCalc();});cBox.appendChild(b);});
+function simPreset(k){const p=SP[k];sIn.mode.value=p.mode;sIn.amp.value=p.amp;sIn.pw.value=p.pw;sIn.f.value=p.f;sIn.z.value=p.z;sIn.lead.value=p.lead;sc=p.c;$$("#sim-presets .chip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.p===k));simCalc();}
+function simCalc(){
+  const mode=sIn.mode.value,amp=+sIn.amp.value,pw=+sIn.pw.value,f=+sIn.f.value,Z=+sIn.z.value,lead=sIn.lead.value;
+  $$("#s-contacts .chip").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.c===sc));
+  $("#o-amp").textContent=fr(amp)+(mode==="V"?" V":" mA");$("#o-pw").textContent=pw+" µs";$("#o-f").textContent=f+" Hz";$("#o-z").textContent=fr(Z,0)+" Ω";
+  let V,I;if(mode==="V"){V=amp;I=V/Z*1000;}else{I=amp;V=I*Z/1000;}
+  const Lmm=lead==="3"?3:1.5,area=Math.PI*0.127*(Lmm/10),Q=I*pw/1000,D=Q/area,teed=V*V*f*pw/Z,ref=2.5*2.5*130*60/1000,ratio=teed/ref,duty=pw*f/1e4;
+  const K=600*(1+100/pw)/(1+100/60),r=I>0?Math.sqrt(I*1000/K):0;
+  const dc=D>30?"bad":D>20?"mid":"";
+  $("#sim-out").innerHTML=`
+   <div><b>${mode==="V"?fr(I,2)+" mA":fr(V,2)+" V"}</b><span>${mode==="V"?"courant résultant":"tension résultante"}</span></div>
+   <div><b>${fr(Q,3)} µC</b><span>charge par phase</span></div>
+   <div class="${dc}"><b>${fr(D,1)} µC/cm²</b><span>densité de charge par phase (seuil 30)</span><span class="gauge"><i style="width:${Math.min(100,D/30*100)}%;background:${D>30?"#FF9189":D>20?"#E8BD5C":"#6FD39B"}"></i></span></div>
+   <div><b>${fr(teed,0)} µW</b><span>énergie par seconde et par électrode ; ${fr(teed*2,0)} µW en bilatéral</span></div>
+   <div class="${ratio>8?"mid":""}"><b>× ${fr(ratio,1)}</b><span>par rapport au réglage Parkinson de référence (2,5 V, 60 µs, 130 Hz)</span></div>
+   <div><b>≈ ${fr(r,1)} mm</b><span>rayon d'activation indicatif (modèle simplifié)</span></div>
+   <div><b>${fr(1000/f,1)} ms</b><span>période entre deux impulsions</span></div>
+   <div><b>${fr(duty,2)} %</b><span>rapport cyclique (temps « actif »)</span></div>`;
+  const al=$("#sim-alert");
+  if(D>30){al.hidden=false;al.textContent="Densité de charge au-dessus de 30 µC/cm² par phase : zone associée à un risque de lésion tissulaire. Un vrai programmateur alerterait ou bloquerait ce réglage.";}
+  else al.hidden=true;
+  // lead drawing
+  const s=$("#s-lead-svg");s.innerHTML="";const pxmm=8,cx=150,tip=272,S=lead==="3"?4:0.5;
+  const defs=el("defs",{},s),g=el("radialGradient",{id:"sg"},defs);el("stop",{offset:"0","stop-color":"#F2AA3F","stop-opacity":".75"},g);el("stop",{offset:".7","stop-color":"#F2AA3F","stop-opacity":".25"},g);el("stop",{offset:"1","stop-color":"#F2AA3F","stop-opacity":".05"},g);
+  for(let x=cx%8;x<300;x+=8)el("line",{x1:x,y1:0,x2:x,y2:300,stroke:"#26323A","stroke-width":.6},s);
+  for(let y=tip%8;y<300;y+=8)el("line",{x1:0,y1:y,x2:300,y2:y,stroke:"#26323A","stroke-width":.6},s);
+  const cys=[];for(let i=0;i<4;i++){const bot=tip-i*(Lmm+S)*pxmm,top=bot-Lmm*pxmm;cys.push((top+bot)/2);}
+  if(r>0){el("circle",{cx,cy:cys[sc],r:r*pxmm,fill:"url(#sg)",stroke:"#F2AA3F","stroke-width":1.2,"stroke-dasharray":"4 3",class:"vta-circle"},s);}
+  const lw=1.27*pxmm;el("rect",{x:cx-lw/2,y:6,width:lw,height:tip-6+lw/2,rx:lw/2,fill:"#6E7B84"},s);
+  for(let i=0;i<4;i++){const bot=tip-i*(Lmm+S)*pxmm;el("rect",{x:cx-lw/2-1,y:bot-Lmm*pxmm,width:lw+2,height:Lmm*pxmm,fill:i===sc?"#F2AA3F":"#E3E9EC",rx:1},s);}
+  el("line",{x1:20,y1:286,x2:60,y2:286,stroke:"#D8E0E5","stroke-width":2},s);
+  const t1=el("text",{x:20,y:280,fill:"#93A1AB","font-family":"Archivo, sans-serif","font-size":12},s);t1.textContent="5 mm";
+  const t2=el("text",{x:176,y:cys[sc]+4,fill:"#D8E0E5","font-family":"Archivo, sans-serif","font-size":12},s);t2.textContent=`contact ${sc}`;
+  // waveform
+  const w=$("#s-wave");w.innerHTML="";const base=40,x0=10,pxms=340/30;
+  el("line",{x1:x0,y1:base,x2:350,y2:base,stroke:"#3A4852"},w);
+  const h=6+Math.min(1,(mode==="V"?V:I)/8)*50,pwpx=Math.max(1.6,pw/450*7);let d=`M${x0},${base}`;
+  for(let t=1;t<30;t+=1000/f){const x=x0+t*pxms;d+=` L${x},${base} L${x},${base+h} L${x+pwpx},${base+h} L${x+pwpx},${base} L${x+pwpx+1},${base-h*0.18} L${x+pwpx+Math.min(9,pwpx*4)},${base-h*0.12} L${x+pwpx+Math.min(12,pwpx*5)},${base}`;}
+  d+=` L350,${base}`;el("path",{d,fill:"none",stroke:"#F2AA3F","stroke-width":1.6,"stroke-linejoin":"round"},w);
+  const tw=el("text",{x:x0,y:104,fill:"#93A1AB","font-family":"Archivo, sans-serif","font-size":11},w);tw.textContent="fenêtre de 30 ms ; largeur des impulsions exagérée pour être visible";
+}
+Object.values(sIn).forEach(i=>i.addEventListener("input",()=>{$$("#sim-presets .chip").forEach(b=>b.setAttribute("aria-pressed","false"));simCalc();}));
+$$("#sim-presets .chip").forEach(b=>b.addEventListener("click",()=>simPreset(b.dataset.p)));
+simPreset("vcvs");
+
+/* ---------------- Clinical case ---------------- */
+const CS=[
+{t:"Le dossier",pt:0,data:`M−6. 16 ans d'évolution. Lavages 5 h par jour, vérifications 2 h. Y-BOCS 35 (obsessions 17, compulsions 18), HAM-D 22, EGF 35. Fluoxétine 60 mg (16 semaines), sertraline 200 mg (14 semaines), clomipramine 225 mg (12 semaines) avec aripiprazole 10 mg (10 semaines) ; deux programmes d'EPR, 46 séances au total. Insight bon.`,
+ d:[["v","J'ai revérifié trois fois l'historique de ses traitements, ce qui est un peu ironique vu le sujet. Tout y est : trois inhibiteurs de recapture à pleine dose, dont la clomipramine, une augmentation, et surtout deux vraies EPR."],["h","Donc pas un faux réfractaire. Trente-cinq, c'est la zone extrême. Pourquoi la stimulation plutôt qu'une capsulotomie ?"],["v","La réversibilité, et le fait de pouvoir ajuster. Mais je veux qu'on lui dise clairement : à peu près un patient sur deux répond, et répondre, pour lui, voudrait dire descendre vers 22 ou 23. Pas guérir."],["h","D'accord. Et qu'il comprenne la contrainte du boîtier : avec des réglages capsulaires, on part sur un rechargeable."]],
+ k:`Vérifier la réalité de la résistance, EPR comprise, avant tout. Voir <a href="#c1">chapitre 1</a> et <a href="#c6">chapitre 6</a>.`},
+{t:"Le bloc",pt:0,data:`J0. Électrodes bilatérales le long du bras antérieur ventral de la capsule : contact 0 dans l'accumbens, contact 3 dans la capsule. Tests chez le patient éveillé.`,
+ d:[["h","Trajectoire gauche validée, on passe à distance du sillon et de la veine. Contact 0 dans l'accumbens, contact 3 dans la capsule."],["v","Test à droite sur le contact 2 : à 3 volts, il dit que quelque chose se desserre dans sa poitrine. À 5 volts, il sourit sans raison et parle plus vite."],["h","Et à 6,5 ?"],["v","Bouffée de chaleur, angoisse. On note une fenêtre intéressante entre 3 et 5 volts sur ce contact."]],
+ k:`Les effets aigus servent de boussole pour choisir le contact, pas de destination. Voir <a href="#c7">chapitre 7</a>.`},
+{t:"Activation",pt:1,data:`S3. Après deux bonnes semaines post-opératoires, retour des symptômes. Activation bilatérale sur le contact 2 : 3,0 V, 90 µs, 130 Hz. Y-BOCS 33 (−6 %).`,
+ d:[["v","Il a eu deux très bonnes semaines juste après l'opération, puis tout est revenu."],["h","L'effet de microlésion. On démarre bas : 3 volts, 90 microsecondes, 130 hertz, des deux côtés, contact 2."],["v","Je le revois tous les quinze jours, et on monte d'un demi-volt par palier si c'est bien toléré."]],
+ k:`Ne pas confondre l'amélioration post-opératoire transitoire avec l'effet de la stimulation. Voir <a href="#c6">chapitre 6</a>.`},
+{t:"Le dérapage",pt:2,data:`M2. À 5,0 V : 4 h de sommeil par nuit, achats impulsifs, discours accéléré. Retour à 4,5 V ; résolution en une semaine. Y-BOCS 29 (−17 %).`,
+ d:[["v","Sa femme m'a appelée : il dort quatre heures par nuit et il a acheté deux vélos en une semaine."],["h","À 5 volts ? On redescend à 4,5 et on surveille."],["v","C'est l'effet indésirable de la stimulation le plus fréquent avec ces cibles. En général, ça rentre dans l'ordre en quelques jours après la baisse."],["h","Et on ne court pas après l'euphorie du réglage aigu."]],
+ k:`Hypomanie : on ajuste, on n'abandonne pas. Voir <a href="#c8">chapitre 8</a>.`},
+{t:"Réponse partielle",pt:3,data:`M6. 4,5 V, 120 µs, 130 Hz. Y-BOCS 24 (−31 %) : réponse partielle. Reprise de l'EPR.`,
+ d:[["h","Moins trente et un pour cent. Réponse partielle."],["v","Et c'est maintenant que ça devient intéressant : il accepte des expositions qu'il refusait depuis des années. On relance l'EPR."],["h","La stimulation ouvre la porte, la thérapie le fait passer de l'autre côté."],["v","Joli. Je te l'emprunte pour la présentation."]],
+ k:`Associer l'EPR après l'implantation. Voir <a href="#c3">chapitre 3</a>.`},
+{t:"Un an après",pt:5,data:`M9 : Y-BOCS 19 (−46 %). M12 : Y-BOCS 18 (−49 %), répondeur ; HAM-D 9 ; reprise d'un mi-temps. Un week-end sans recharge : rebond des symptômes en 36 heures.`,
+ d:[["v","Dix-huit à un an. Il a repris un mi-temps."],["h","Répondeur, sans discussion. Mais dix-huit, ça reste un TOC modéré."],["v","Il le sait, on en a parlé. Autre chose : un week-end, il a oublié de recharger. En un jour et demi, les rituels étaient revenus, avec une vraie chute d'humeur."],["h","Le rebond à l'arrêt. On refait l'éducation à la recharge, et on programme une alarme."]],
+ k:`Répondeur ne veut pas dire guéri, et le bénéfice dépend du matériel. Voir <a href="#c1">chapitre 1</a> et <a href="#c8">chapitre 8</a>.`}
+];
+const CPTS=[["Inclusion",35],["S3",33],["M2",29],["M6",24],["M9",19],["M12",18]];
+let cstep=0;
+const csBox=$("#case-steps");
+CS.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=(i+1)+". "+s.t;b.addEventListener("click",()=>caseShow(i));csBox.appendChild(b);});
+function caseChart(upto){
+  const s=$("#case-chart");s.innerHTML="";const X=i=>60+i*88,Y=v=>20+(40-v)/40*170;
+  const F="Archivo, sans-serif";
+  [0,10,20,30,40].forEach(v=>{el("line",{x1:52,y1:Y(v),x2:505,y2:Y(v),stroke:"#26323A"},s);const t=el("text",{x:44,y:Y(v)+5,"text-anchor":"end",fill:"#93A1AB","font-family":F,"font-size":15},s);t.textContent=v;});
+  [[26.25,"réponse partielle",-6],[22.75,"réponse",17],[12,"rémission",-6]].forEach(([v,l,dy])=>{el("line",{x1:52,y1:Y(v),x2:505,y2:Y(v),stroke:v===12?"#6FD39B":"#E8BD5C","stroke-dasharray":"5 4","stroke-width":1.2},s);const t=el("text",{x:58,y:Y(v)+dy,"text-anchor":"start",fill:v===12?"#6FD39B":"#E8BD5C","font-family":F,"font-size":15},s);t.textContent=l;});
+  CPTS.forEach((p,i)=>{const t=el("text",{x:X(i),y:222,"text-anchor":"middle",fill:"#93A1AB","font-family":F,"font-size":15},s);t.textContent=p[0];});
+  const pts=CPTS.slice(0,upto+1);
+  if(pts.length>1)el("polyline",{points:pts.map((p,i)=>X(i)+","+Y(p[1])).join(" "),fill:"none",stroke:"#F2AA3F","stroke-width":2.5,"stroke-linejoin":"round"},s);
+  pts.forEach((p,i)=>{const last=i===pts.length-1;el("circle",{cx:X(i),cy:Y(p[1]),r:last?7:4.5,fill:last?"#F2AA3F":"#10161A",stroke:"#F2AA3F","stroke-width":2},s);if(last){const t=el("text",{x:X(i),y:Y(p[1])-14,"text-anchor":"middle",fill:"#D8E0E5","font-family":F,"font-size":16,"font-weight":700},s);t.textContent=p[1];}});
+}
+function caseShow(i){
+  cstep=i;const s=CS[i];
+  $$("#case-steps .chip").forEach((b,j)=>b.setAttribute("aria-pressed",j===i));
+  caseChart(s.pt);
+  $("#case-body").innerHTML=`<p class="case-data">${s.data}</p><div class="dialog">${s.d.map(([w,t])=>`<div class="line ${w}"><span class="who">${w==="v"?"C. Vasseur":"S. Haddad"}</span><span>${t}</span></div>`).join("")}</div><p class="case-key">${s.k}</p>`;
+  $("#case-prev").disabled=i===0;$("#case-next").disabled=i===CS.length-1;
+}
+$("#case-prev").addEventListener("click",()=>{if(cstep>0)caseShow(cstep-1);});
+$("#case-next").addEventListener("click",()=>{if(cstep<CS.length-1)caseShow(cstep+1);});
+caseShow(0);
+
+/* ---------------- Quiz ---------------- */
+const QZ=[
+{q:"Un patient passe de 34 à 22 au Y-BOCS. Selon le consensus international, il est :",o:["En rémission","Répondeur","Répondeur partiel","Non-répondeur"],a:1,e:`Baisse de 35,3 % : répondeur, à condition que l'impression clinique globale suive (CGI-I de 1 ou 2). Mais 22 reste un TOC modéré ; la rémission exige un score ≤ 12 <cite data-r="mataixcols2016"></cite>.`},
+{q:"Dans la méta-analyse sur données individuelles des 9 essais contre stimulation fictive, l'avantage moyen de la stimulation active est d'environ :",o:["2 points","5 points","13 points","20 points"],a:1,e:`5,1 points (IC 95 % 2,0 à 8,1), avec une qualité de preuve jugée faible. Les 13,5 points de la cohorte d'Amsterdam sont une baisse avant-après, sans contrôle <cite data-r="cohen2025,denys2020"></cite>.`},
+{q:"Quelle cible a reçu une recommandation de niveau I dans les recommandations neurochirurgicales américaines de 2021 ?",o:["La capsule ventrale et le striatum ventral","Le noyau sous-thalamique bilatéral","Le BNST","Le pédoncule thalamique inférieur"],a:1,e:`Le NST bilatéral est en niveau I, l'accumbens et le BNST en niveau II, et aucune cible optimale n'est identifiée. Le niveau I repose essentiellement sur l'essai français de 16 patients <cite data-r="staudt2021,mallet2008"></cite>.`},
+{q:"Pourquoi utilise-t-on souvent des stimulateurs rechargeables pour la stimulation capsulaire ?",o:["Ce sont les seuls compatibles avec l'IRM","Les réglages consomment beaucoup d'énergie","Ils évitent l'hypomanie","Ils délivrent un courant alternatif"],a:1,e:`L'énergie délivrée croît avec le carré de la tension et avec la durée d'impulsion : un réglage capsulaire peut consommer plus de dix fois plus qu'un réglage Parkinson <cite data-r="koss2005"></cite>. Essayez-le dans le simulateur du chapitre 7.`},
+{q:"Dans la capsule interne, la stimulation agit surtout en :",o:["Détruisant les neurones au contact de l'électrode","Activant des axones qui relient cortex préfrontal, thalamus et NST","Libérant localement des médicaments","Chauffant le tissu"],a:1,e:`Les axones myélinisés ont les seuils d'activation les plus bas ; l'effet se propage à distance, jusqu'au cortex préfrontal <cite data-r="mcintyre2004,haber2021"></cite>.`},
+{q:"Quel effet indésirable lié à la stimulation est le plus fréquemment rapporté ?",o:["L'hypomanie","La paralysie","La perte de la vue","L'épilepsie chronique"],a:0,e:`L'hypomanie, souvent transitoire et corrigée en ajustant les paramètres <cite data-r="cohen2025,thava2026"></cite>.`},
+{q:"Le boîtier d'un patient répondeur s'arrête brutalement. Que faut-il craindre ?",o:["Rien : l'effet persiste des mois","Un rebond rapide des symptômes, en heures ou en jours","Une amélioration paradoxale","Une crise d'épilepsie systématique"],a:1,e:`Un rebond anxieux, dépressif et obsessionnel a été décrit rapidement après l'arrêt, d'où l'éducation à la recharge et le remplacement anticipé des boîtiers <cite data-r="ooms2014"></cite>.`},
+{q:"Pourquoi la baisse observée dans les cohortes ouvertes (40 à 47 %) dépasse-t-elle l'écart mesuré contre stimulation fictive ?",o:["Parce que les cohortes sont falsifiées","Parce que s'y ajoutent attentes, régression vers la moyenne, temps et co-traitements","Parce que la stimulation fictive aggrave les patients","Il n'y a en réalité aucune différence"],a:1,e:`Ces facteurs gonflent les chiffres ouverts. À l'inverse, des phases fictives courtes peuvent sous-estimer un effet qui se construit en mois <cite data-r="cohen2025"></cite>.`},
+{q:"Selon la méta-analyse de 2026 sur les prédicteurs, lequel est associé à une moins bonne réponse ?",o:["Un score initial élevé","Un traitement antipsychotique","Des pensées intrusives agressives","L'association anxiété, peur et évitement"],a:1,e:`La prise d'antipsychotiques prédisait la non-réponse, probablement comme marqueur de sévérité ou de comorbidité. Les trois autres étaient associés à une meilleure réponse <cite data-r="thava2026"></cite>.`},
+{q:"La cible connectomique unifiée proposée en 2020 correspond à :",o:["Un noyau du thalamus","Un faisceau reliant le cortex frontal médian à la région du NST","Le cervelet","L'hippocampe"],a:1,e:`Un faisceau qui traverse la capsule interne et rejoint la région du NST, proche de la voie hyperdirecte ; il expliquerait que des cibles différentes donnent des résultats voisins <cite data-r="li2020"></cite>.`},
+{q:"En quelle année la première série de stimulation profonde dans le TOC a-t-elle été publiée ?",o:["1987","1999","2008","2014"],a:1,e:`En 1999, chez 4 patients, dans la capsule interne <cite data-r="nuttin1999"></cite>.`},
+{q:"Lequel de ces éléments est une contre-indication habituelle ?",o:["Avoir 40 ans","Un trouble psychotique","Une dépression associée","Des obsessions religieuses"],a:1,e:`Les troubles psychotiques font partie des exclusions classiques. La dépression associée est fréquente, et les obsessions religieuses étaient même associées à une meilleure réponse dans une méta-analyse <cite data-r="nuttin2014,alonso2015"></cite>.`}
+];
+let qi=0,qs=0,qans=false;
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+function qShow(){
+  const box=$("#quiz");
+  if(qi>=QZ.length){
+    $("#qz-prog").textContent="Résultat";
+    const msg=qs>=10?"Solide : vous maîtrisez l'essentiel, y compris la lecture critique des preuves.":qs>=7?"Bonne base. Relisez les chapitres 5 et 9 pour affiner la lecture critique.":"Reprenez les chapitres 1, 5 et 7, puis retentez le quiz.";
+    box.innerHTML=`<p class="q">Score : ${qs} sur ${QZ.length}.</p><p>${msg}</p><div class="qnav"><span></span><button class="btn" type="button" id="qz-restart">Recommencer</button></div>`;
+    $("#qz-restart").addEventListener("click",()=>{qi=0;qs=0;qShow();});return;
+  }
+  qans=false;const q=QZ[qi];
+  $("#qz-prog").textContent=`Question ${qi+1} sur ${QZ.length}, score actuel ${qs}.`;
+  box.innerHTML=`<p class="q">${q.q}</p><div class="opts">${shuffle(q.o.map((o,i)=>[o,i])).map(([o,i])=>`<button class="opt" type="button" data-i="${i}">${o}</button>`).join("")}</div><div class="fb" id="qz-fb" hidden aria-live="polite"></div><div class="qnav"><span class="small" style="color:var(--film-muted)">Choisissez une réponse.</span><button class="btn" type="button" id="qz-next" disabled>Question suivante</button></div>`;
+  $$(".opt",box).forEach(b=>b.addEventListener("click",()=>{
+    if(qans)return;qans=true;const i=+b.dataset.i,ok=i===q.a;if(ok)qs++;
+    $$(".opt",box).forEach(x=>{x.disabled=true;if(+x.dataset.i===q.a)x.classList.add("right");});
+    if(!ok)b.classList.add("wrong");
+    const fb=$("#qz-fb");fb.hidden=false;fb.innerHTML=`<b>${ok?"Bonne réponse.":"Pas tout à fait."}</b> ${q.e}`;processCites(fb);
+    const nx=$("#qz-next");nx.disabled=false;nx.textContent=qi===QZ.length-1?"Voir le résultat":"Question suivante";nx.focus();
+  }));
+  $("#qz-next").addEventListener("click",()=>{qi++;qShow();});
+}
+qShow();
+
+/* ---------------- Lecture vocale ---------------- */
+(function(){
+const synth=window.speechSynthesis,hasTTS=!!synth&&typeof window.SpeechSynthesisUtterance!=="undefined";
+const prefs=Object.assign({rate:1,voice:"",chain:false},store.get("scp-toc-tts",{}));
+const savePrefs=()=>store.set("scp-toc-tts",prefs);
+const IC={play:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>',pause:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>',prev:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h2v14H5zM20 5v14L9 12z"/></svg>',next:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5h2v14h-2zM4 5l11 7-11 7z"/></svg>',stop:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h12v12H6z"/></svg>'};
+const REPL=[
+[/\bY-BOCS-II\b/g,"Y-Bocs deux"],[/\bY-BOCS\b/g,"Y-Bocs"],
+[/(\d)\s?µC\/cm²/g,"$1 microcoulombs par centimètre carré"],[/(\d)\s?µs\b/g,"$1 microsecondes"],[/\bµs\b/g,"microsecondes"],[/(\d)\s?µW\b/g,"$1 microwatts"],[/(\d)\s?µC\b/g,"$1 microcoulombs"],
+[/(\d)\s?mA\b/g,"$1 milliampères"],[/(\d)\s?Hz\b/g,"$1 hertz"],[/(\d)\s?Ω/g,"$1 ohms"],[/(\d)\s?mm\b/g,"$1 millimètres"],[/(\d)\s?mg\b/g,"$1 milligrammes"],[/(\d)\s?ms\b/g,"$1 millisecondes"],[/(\d)\s?V\b/g,"$1 volts"],[/(\d)\s?h\b/g,"$1 heures"],
+[/\bavant M−(\d+)/g,"plus de $1 mois avant"],[/\bM−(\d+) à M−(\d+)/g,"de $1 à $2 mois avant"],[/\bM−(\d+)/g,"$1 mois avant"],[/\bM(\d+)\b/g,"mois $1"],[/\bS(\d+)\b/g,"semaine $1"],[/\bJ0\b/g,"le jour de l'opération"],[/\bJ(\d+)\b/g,"jour $1"],
+[/(\w)\s?–\s?(\w)/g,"$1 à $2"],[/−\s?(?=\d)/g,"moins "],
+[/≈\s?/g,"environ "],[/≥\s?/g,"supérieur ou égal à "],[/≤\s?/g,"inférieur ou égal à "],[/×\s?/g,"fois "],[/\s=\s/g," égal "],[/\s\/\s/g," et "],
+[/\bIC 95\s?%/g,"intervalle de confiance à 95 %"],[/\bcoll\./g,"collaborateurs"],[/\bvs\b/g,"contre"],
+[/\bamSTN\b/g,"N S T antéro-médian"],[/\bNST\b/g,"N S T"],[/\bvALIC\b/g,"partie ventrale de la capsule"],[/\bALIC\b/g,"bras antérieur de la capsule"],[/\bVC\/VS\b/g,"capsule ventrale et striatum ventral"],[/\bNAc\b/g,"accumbens"],[/\bslMFB\b/g,"faisceau médian du télencéphale"],
+[/\bBNST\b/g,"B N S T"],[/\bITP\b/g,"I T P"],[/\bHAM-D\b/g,"Hamilton dépression"],[/\bHAM-A\b/g,"Hamilton anxiété"],[/\bCGI-I\b/g,"C G I I"],[/\bCGI-S\b/g,"C G I S"],[/\bNNT\b/g,"N N T"],[/\bOR\b/g,"odds ratio"],
+[/\bGPi\b/g,"pallidum interne"],[/\bGPe\b/g,"pallidum externe"],[/\bSNr\b/g,"substance noire réticulée"],[/\bPFC\b/g,"cortex préfrontal"],[/\bTEED\b/g,"T E E D"],[/\bHDE\b/g,"H D E"],[/\bEGF\b/g,"E G F"],[/\bISRS\b/g,"I S R S"],[/\bIRS\b/g,"I R S"],[/\bTCC\b/g,"T C C"],[/\bFDA\b/g,"F D A"],[/\bCNS\b/g,"C N S"],[/\bNICE\b/g,"Nice"],[/\bIRM\b/g,"I R M"],[/\bEPR\b/g,"E P R"],[/\bSCP\b/g,"S C P"],[/\bTOC\b/g,"T O C"],[/\bDSM-5\b/g,"D S M 5"],
+[/[«»·*]/g,""],[/\s+([.,])/g,"$1"]
+];
+const norm=t=>{t=t.replace(/[\u00a0\u202f]/g," ");REPL.forEach(([a,b])=>t=t.replace(a,b));return t.replace(/\s+/g," ").trim();};
+const chunk=t=>{if(t.length<=230)return[t];const parts=t.match(/[^.;:!?]+[.;:!?]+\s*|[^.;:!?]+$/g)||[t];const res=[];let cur="";parts.forEach(p=>{if((cur+p).length>230&&cur.trim()){res.push(cur.trim());cur=p;}else cur+=p;});if(cur.trim())res.push(cur.trim());return res;};
+const textOf=node=>{if(!node)return"";const c=node.cloneNode(true);c.querySelectorAll("sup.cite,.chap-num,svg,.pager").forEach(x=>x.remove());c.querySelectorAll(".conf").forEach(x=>x.textContent=" ("+x.textContent.trim()+") ");return c.textContent.replace(/\s+/g," ").trim();};
+const strip=h=>{const d=document.createElement("div");d.innerHTML=h;return d.textContent;};
+const SEL=[".hero h1",".hero .lede",".txt h3",".txt p",".txt li",".txt h4",".keyfig > div",".legend-conf > div",".plate-cap",".note h4",".note p",".cols h4",".cols li","table",".steps summary",".steps .body p",".gloss dt"].join(",");
+function build(sec){
+  const out=[];
+  const push=(t,el,who,before,getEl)=>{t=norm(t);if(!t||t==="."||t==="·")return;chunk(t).forEach(c=>out.push({text:c,el,who:who||"n",before,getEl}));};
+  const head=sec.querySelector(".chap-head");
+  if(head){push(`Chapitre ${head.querySelector(".chap-num").textContent.trim()}. ${textOf(head.querySelector("h2"))}.`,head);push(textOf(head.querySelector("p")),head);}
+  if(sec.id==="c10"){
+    sec.querySelectorAll(".txt p").forEach(p=>push(textOf(p),p));
+    CS.forEach((s,i)=>{
+      const bf=()=>{if(cstep!==i)caseShow(i);};
+      push(`Étape ${i+1} : ${s.t}.`,null,"n",bf,()=>$("#case-body .case-data"));
+      push(strip(s.data),null,"n",bf,()=>$("#case-body .case-data"));
+      s.d.forEach(([w,t],j)=>push(t,null,w,bf,()=>$$("#case-body .line")[j]));
+      push("À retenir. "+strip(s.k),null,"n",bf,()=>$("#case-body .case-key"));
+    });
+    return out;
+  }
+  const nodes=[...sec.querySelectorAll(SEL)];
+  nodes.forEach(nd=>{
+    if(nd.closest(".plate")&&!nd.matches(".plate-cap"))return;
+    if(nodes.some(o=>o!==nd&&o.contains(nd)))return;
+    if(nd.matches("table")){
+      const hs=[...nd.querySelectorAll("thead th")].map(textOf);
+      nd.querySelectorAll("tbody tr").forEach(tr=>{const cs=[...tr.children].map(textOf);const rest=cs.slice(1).map((c,i)=>(c&&c!=="·")?`${hs[i+1]} : ${c}`:"").filter(Boolean);push(cs[0]+". "+rest.join(". ")+".",tr);});
+      return;}
+    if(nd.matches(".gloss dt")){push(textOf(nd)+" : "+textOf(nd.nextElementSibling),nd);return;}
+    if(nd.matches(".keyfig > div")){push(textOf(nd.querySelector("dt"))+". "+textOf(nd.querySelector("dd")),nd);return;}
+    if(nd.matches(".steps summary")){push(textOf(nd.querySelector("b"))+", "+textOf(nd.querySelector(".when"))+".",nd);return;}
+    if(nd.matches("h1,h3,h4,.plate-cap")){let t=textOf(nd).replace(/^(Planche \d+\.)(?=\S)/,"$1 ").trim();if(!/[.?!:]$/.test(t))t+=".";push(t,nd);return;}
+    push(textOf(nd),nd);
+  });
+  return out;
+}
+/* voices */
+let frV=[],vN=null,vV=null,vH=null,sameDialog=false;
+function loadVoices(){
+  if(!hasTTS)return;
+  const all=synth.getVoices();frV=all.filter(v=>/^fr/i.test(v.lang));
+  const rank=v=>(/natural|neural|premium|enhanced|google|online/i.test(v.name)?2:0)+(/fr[-_]FR/i.test(v.lang)?1:0)+(v.localService?0:0);
+  frV.sort((a,b)=>rank(b)-rank(a));
+  const sel=$("#tts-voice");sel.innerHTML=frV.length?frV.map((v,i)=>`<option value="${i}">${v.name.replace(/Microsoft |Google /,"")} (${v.lang})</option>`).join(""):`<option value="">Voix par défaut</option>`;
+  let ni=frV.findIndex(v=>v.name===prefs.voice);if(ni<0)ni=0;if(frV.length)sel.value=String(ni);
+  vN=frV[ni]||null;
+  const fem=/amélie|amelie|audrey|aurélie|aurelie|marie|julie|hortense|denise|céline|celine|\blea\b|léa|virginie|eloise|éloïse|sylvie|charlotte|female|femme|claire|vivienne|brigitte|eloïse/i;
+  const mal=/thomas|nicolas|paul|henri|claude|jacques|rémy|remy|\bmale\b|homme|daniel|antoine|jean|mathieu|guillaume|yves|fabrice|gérard|gerard|alain|henri/i;
+  vV=frV.find(v=>fem.test(v.name))||vN;vH=frV.find(v=>mal.test(v.name)&&v!==vV)||frV.find(v=>v!==vV)||vV;
+  sameDialog=!vV||!vH||vV===vH;
+  $("#tts-msg").textContent=frV.length?(sameDialog?"Une seule voix française disponible : les deux intervenants du cas clinique sont distingués par la hauteur de voix.":""):"Aucune voix française installée sur cet appareil : lecture avec la voix par défaut.";
+}
+/* player */
+const bar=document.createElement("div");bar.id="tts-bar";bar.hidden=true;bar.setAttribute("role","region");bar.setAttribute("aria-label","Lecteur audio");
+bar.innerHTML=`<div class="tts-top"><span class="tts-title" id="tts-title"></span><span class="tts-pos" id="tts-pos" aria-live="off"></span></div>
+<div class="tts-ctrl">
+<button type="button" class="tts-b" id="tts-prev" aria-label="Paragraphe précédent">${IC.prev}</button>
+<button type="button" class="tts-b main" id="tts-play" aria-label="Pause">${IC.pause}</button>
+<button type="button" class="tts-b" id="tts-next" aria-label="Paragraphe suivant">${IC.next}</button>
+<button type="button" class="tts-b" id="tts-stop" aria-label="Arrêter la lecture">${IC.stop}</button>
+<label class="tts-opt">Vitesse <select id="tts-rate"><option value="0.8">0,8×</option><option value="0.9">0,9×</option><option value="1">1×</option><option value="1.15">1,15×</option><option value="1.3">1,3×</option><option value="1.5">1,5×</option></select></label>
+<label class="tts-opt">Voix <select id="tts-voice"></select></label>
+<label class="tts-opt"><input type="checkbox" id="tts-chain"> Enchaîner les chapitres</label>
+</div><div class="tts-msg" id="tts-msg"></div><div class="tts-prog"><i id="tts-progbar"></i></div>`;
+document.body.appendChild(bar);
+$("#tts-rate").value=String(prefs.rate);$("#tts-chain").checked=!!prefs.chain;
+let segs=[],idx=0,playing=false,chapId=null,gen=0,chaining=false,curEl=null,curU=null;
+const readable=id=>id!=="c11";
+function highlight(el){
+  if(curEl)curEl.classList.remove("tts-reading");curEl=el||null;if(!el)return;
+  const d=el.closest("details");if(d&&!d.open)d.open=true;
+  el.classList.add("tts-reading");
+  const r=el.getBoundingClientRect(),vh=window.innerHeight;
+  if(r.top<70||r.bottom>vh-(bar.offsetHeight+30))el.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+}
+function ui(){
+  $("#tts-pos").textContent=segs.length?`${Math.min(idx+1,segs.length)} / ${segs.length}`:"";
+  $("#tts-progbar").style.width=(segs.length?idx/segs.length*100:0)+"%";
+  const b=$("#tts-play");b.innerHTML=playing?IC.pause:IC.play;b.setAttribute("aria-label",playing?"Pause":"Lire");
+}
+function voiceFor(w){return w==="v"?vV:w==="h"?vH:vN;}
+function speakAt(i){
+  gen++;const my=gen;
+  if(i>=segs.length){finish();return;}
+  idx=i;const s=segs[i];
+  if(s.before)s.before();
+  highlight(s.getEl?s.getEl():s.el);ui();
+  let text=s.text;if(sameDialog&&s.who!=="n"&&(i===0||segs[i-1].who!==s.who))text=(s.who==="v"?"Claire : ":"Samir : ")+text;
+  const u=new SpeechSynthesisUtterance(text);u.lang="fr-FR";u.rate=prefs.rate;
+  const v=voiceFor(s.who);if(v)u.voice=v;
+  u.pitch=sameDialog?(s.who==="v"?1.15:s.who==="h"?0.8:1):1;
+  u.onend=()=>{if(my===gen&&playing)speakAt(i+1);};
+  u.onerror=e=>{if(my!==gen||!playing||e.error==="interrupted"||e.error==="canceled")return;playing=false;ui();$("#tts-msg").textContent="La synthèse vocale a échoué sur cet appareil ("+(e.error||"erreur")+"). Essayez une autre voix ou un autre navigateur.";};
+  curU=u;
+  if(synth.speaking||synth.pending){synth.cancel();setTimeout(()=>{if(my===gen&&playing)synth.speak(u);},80);}
+  else synth.speak(u);
+}
+function start(id,from){
+  if(!hasTTS)return;
+  loadVoices();
+  const sec=document.getElementById(id);if(!sec)return;
+  segs=build(sec);chapId=id;playing=true;
+  $("#tts-title").textContent="Lecture : "+sec.dataset.title;
+  bar.hidden=false;document.body.classList.add("tts-on");
+  speakAt(from||0);
+}
+function pause(){playing=false;gen++;synth.cancel();ui();}
+function resume(){playing=true;speakAt(idx);}
+function stop(){playing=false;gen++;if(hasTTS)synth.cancel();highlight(null);bar.hidden=true;document.body.classList.remove("tts-on");chapId=null;segs=[];}
+function finish(){
+  playing=false;highlight(null);
+  const i=chaps.findIndex(c=>c.id===chapId);let n=i+1;while(n<chaps.length&&!readable(chaps[n].id))n++;
+  if(prefs.chain&&n<chaps.length){chaining=true;location.hash=chaps[n].id;return;}
+  idx=segs.length;ui();$("#tts-pos").textContent="Terminé";
+}
+function blockStep(dir){
+  if(!segs.length)return;const cur=segs[idx]||segs[segs.length-1];const key=s=>s.getEl?s.text:s.el;
+  let j=idx;
+  if(dir<0){j=idx-1;while(j>0&&segs[j].el&&segs[j-1].el===segs[j].el)j--;if(j<0)j=0;}
+  else{j=idx+1;while(j<segs.length&&segs[j].el&&segs[j].el===cur.el)j++;}
+  playing=true;if(j>=segs.length){finish();return;}speakAt(j);
+}
+$("#tts-play").addEventListener("click",()=>{if(playing)pause();else if(idx>=segs.length)start(chapId);else resume();});
+$("#tts-stop").addEventListener("click",stop);
+$("#tts-prev").addEventListener("click",()=>blockStep(-1));
+$("#tts-next").addEventListener("click",()=>blockStep(1));
+$("#tts-rate").addEventListener("change",e=>{prefs.rate=+e.target.value;savePrefs();if(playing)speakAt(idx);});
+$("#tts-voice").addEventListener("change",e=>{const v=frV[+e.target.value];prefs.voice=v?v.name:"";savePrefs();loadVoices();if(playing)speakAt(idx);});
+$("#tts-chain").addEventListener("change",e=>{prefs.chain=e.target.checked;savePrefs();});
+window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(!h.startsWith("c"))return;
+  if(chaining){chaining=false;setTimeout(()=>start(h),250);return;}
+  if(chapId&&h!==chapId)stop();});
+/* per-chapter buttons */
+chaps.forEach(sec=>{
+  if(!readable(sec.id))return;
+  const words=build(sec).reduce((a,s)=>a+s.text.split(/\s+/).length,0),min=Math.max(1,Math.round(words/150));
+  const row=document.createElement("div");row.className="listen";
+  row.innerHTML=`<button type="button" class="listen-btn">${IC.play}<span>Écouter ce chapitre</span></button><span class="listen-dur">${hasTTS?`environ ${min} min à vitesse normale`:"Lecture vocale indisponible dans ce navigateur"}</span>`;
+  const btn=row.querySelector("button");if(!hasTTS)btn.disabled=true;
+  btn.addEventListener("click",()=>start(sec.id));
+  const anchor=sec.querySelector(".chap-head")||sec.querySelector(".hero");anchor.insertAdjacentElement("afterend",row);
+});
+if(hasTTS){loadVoices();if("onvoiceschanged" in synth)synth.onvoiceschanged=loadVoices;}
+window.addEventListener("pagehide",()=>{if(hasTTS)synth.cancel();});
+})();
+
+/* ---------------- Start ---------------- */
+const h0=location.hash.slice(1);show(h0.startsWith("c")?h0:"c0",false);
+})();
+</script>
+</body>
+</html>
